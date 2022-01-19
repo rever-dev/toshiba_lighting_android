@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/basic_bg_gray">
+
+    <View
+        android:id="@+id/devCon_divderTop"
+        android:layout_width="391dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="72dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/devCon_tvBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textColor="@color/ios_blue"
+        android:textSize="18sp"
+        app:drawableStartCompat="@drawable/ic_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:text="@string/back" />
+
+    <TextView
+        android:id="@+id/devCon_tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/devCon_divderTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="吸頂燈" />
+
+    <ImageButton
+        android:id="@+id/devCon_ibtSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:background="@null"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/devCon_divderTop"
+        app:layout_constraintEnd_toStartOf="@+id/devCon_ibtSwitch"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_settings_24"
+        app:tint="@color/ios_blue"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/devCon_ibtSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@null"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/devCon_divderTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_lightbulb_24"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <LinearLayout
+        android:id="@+id/devCon_linlayMainBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/devCon_divderTop">
+
+        <SeekBar
+            android:id="@+id/devCon_sbMbr"
+            style="@style/seekBar_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="210"
+            android:progress="160"
+            android:progressDrawable="@drawable/seekbar_progress_drawable_mbr" />
+
+        <SeekBar
+            android:id="@+id/devCon_sbMc"
+            style="@style/seekBar_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:max="200"
+            android:progress="160"
+            android:progressDrawable="@drawable/seekbar_bg_mc"
+            android:thumb="@drawable/seekbar_thumb" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/devCon_linlayNightMode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/devCon_linlayMainBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/devCon_linlayMainBar">
+
+        <SeekBar
+            android:id="@+id/devCon_sbNightMode"
+            style="@style/seekBar_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:progressDrawable="@drawable/seekbar_progress_drawable_mbr"
+            android:thumb="@null" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/devCon_coslayRGBBtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:animateLayoutChanges="true"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/devCon_linlayMainBar">
+
+        <ImageButton
+            android:id="@+id/devCon_btnG"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/devCon_btnB"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/devCon_btnR"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/button_g" />
+
+        <ImageButton
+            android:id="@+id/devCon_btnB"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/devCon_btnG"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/button_b" />
+
+        <ImageButton
+            android:id="@+id/devCon_btnR"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/devCon_btnG"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/button_r" />
+
+        <ImageButton
+            android:id="@+id/devCon_btnRLess"
+            android:layout_width="46dp"
+            android:layout_height="70dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/devCon_btnR"
+            app:layout_constraintStart_toStartOf="@+id/devCon_btnR"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/button_rgb_less" />
+
+        <ImageButton
+            android:id="@+id/devCon_btnBLess"
+            android:layout_width="46dp"
+            android:layout_height="70dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/devCon_btnB"
+            app:layout_constraintStart_toStartOf="@+id/devCon_btnB"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/button_rgb_less" />
+
+        <ImageButton
+            android:id="@+id/devCon_btnGLess"
+            android:layout_width="46dp"
+            android:layout_height="70dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/devCon_btnG"
+            app:layout_constraintStart_toStartOf="@+id/devCon_btnG"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/button_rgb_less" />
+
+        <ImageButton
+            android:id="@+id/devCon_btnRAdd"
+            android:layout_width="46dp"
+            android:layout_height="70dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/devCon_btnR"
+            app:layout_constraintStart_toEndOf="@+id/devCon_btnR"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/button_rgb_add" />
+
+        <ImageButton
+            android:id="@+id/devCon_btnGAdd"
+            android:layout_width="46dp"
+            android:layout_height="70dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/devCon_btnG"
+            app:layout_constraintStart_toEndOf="@+id/devCon_btnG"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/button_rgb_add" />
+
+        <ImageButton
+            android:id="@+id/devCon_btnBAdd"
+            android:layout_width="46dp"
+            android:layout_height="70dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/devCon_btnB"
+            app:layout_constraintStart_toEndOf="@+id/devCon_btnB"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/button_rgb_add" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/devCon_guid50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/devCon_scrollMode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/devCon_guid50">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/devCon_tabView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabBackground="@drawable/tabbar_bg_bottom_line"
+                app:tabIndicator="@drawable/tabbar_indicator_bg"
+                app:tabIndicatorColor="@null"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="16dp"
+                app:tabTextColor="@color/tabbar_text_color_selector">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="常用" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="自訂" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn53"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/devCon_modebtn50"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/devCon_modebtn53"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/devCon_modebtn51"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn51"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/devCon_modebtn50"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView">
+
+            </com.sttptech.toshiba_lighting.CustomView.ModeButton>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <HorizontalScrollView
+        android:id="@+id/devCon_scrollMode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarThumbHorizontal="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn01"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn02"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn03"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn04"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn05"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn06"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn07"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn08"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn09"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+            <com.sttptech.toshiba_lighting.CustomView.ModeButton
+                android:id="@+id/devCon_modebtn11"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/devCon_tabView" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

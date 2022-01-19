@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg_bottom">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:id="@+id/conWifi_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/image_wifi_connected_60" />
+
+    <TextView
+        android:id="@+id/conWifi_tvConWifi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/connectWifiTo"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/conWifi_img"
+        app:layout_constraintStart_toStartOf="@+id/conWifi_img"
+        app:layout_constraintTop_toBottomOf="@+id/conWifi_img" />
+
+    <EditText
+        android:id="@+id/conWifi_etPwd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/edittext_bg"
+        android:ems="10"
+        android:hint="@string/enterWiFiPassword"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/conWifi_btnConfirm"
+        style="@style/button_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:enabled="true"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:text="@string/confirm"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/conWifi_etPwd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/conWifi_etPwd"
+        app:layout_constraintTop_toBottomOf="@+id/conWifi_etPwd" />
+
+    <Button
+        android:id="@+id/conWifi_btnCancel"
+        style="@style/button_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        android:text="@string/cancel"
+        android:textSize="16sp"
+        app:backgroundTint="@color/edittext_bg_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/conWifi_btnConfirm"
+        app:layout_constraintStart_toStartOf="@+id/conWifi_btnConfirm"
+        app:layout_constraintTop_toBottomOf="@+id/conWifi_btnConfirm" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:drawablePadding="6dp"
+        android:gravity="center"
+        android:text="@string/password"
+        android:textColor="@color/black"
+        app:drawableStartCompat="@drawable/ic_lock_open_24"
+        app:drawableTint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conWifi_tvConWifi" />
+
+    <ImageButton
+        android:id="@+id/conWifi_ibtPwdVisib"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:padding="12dp"
+        app:barrierAllowsGoneWidgets="false"
+        app:layout_constraintBottom_toBottomOf="@+id/conWifi_etPwd"
+        app:layout_constraintEnd_toEndOf="@+id/conWifi_etPwd"
+        app:layout_constraintTop_toTopOf="@+id/conWifi_etPwd"
+        app:srcCompat="@drawable/ic_visibility_off_24"
+        app:tint="@color/black" />
+</androidx.constraintlayout.widget.ConstraintLayout>

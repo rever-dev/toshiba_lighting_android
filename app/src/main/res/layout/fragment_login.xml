@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.Member.Login.LoginFragment">
+
+    <com.youth.banner.Banner
+        android:id="@+id/fragLogin_banner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
+        app:banner_auto_loop="true"
+        app:layout_constraintBottom_toTopOf="@+id/fragLogin_guideline1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fragLogin_guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/basic_bg_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragLogin_guideline1">
+
+        <TextView
+            android:id="@+id/fragLogin_tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/login"
+            android:textColor="@color/text_color_black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragLogin_tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
+            android:text="@string/register_member"
+            android:textColor="@color/text_color_red"
+            app:layout_constraintBottom_toBottomOf="@+id/fragLogin_tvTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragLogin_tvTitle" />
+
+        <TextView
+            android:id="@+id/fragLogin_tvAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="@string/account"
+            android:textColor="@color/text_color_black"
+            app:drawableStartCompat="@drawable/ic_mail_24"
+            app:drawableTint="@color/text_color_black"
+            app:layout_constraintStart_toStartOf="@+id/fragLogin_tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/fragLogin_tvTitle" />
+
+        <EditText
+            android:id="@+id/fragLogin_etAccount"
+            style="@style/editText_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:autofillHints="emailAddress"
+            android:ems="10"
+            android:hint="@string/account_enter"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fragLogin_tvAccount"
+            app:layout_constraintTop_toBottomOf="@+id/fragLogin_tvAccount" />
+
+        <TextView
+            android:id="@+id/fragLogin_tvPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="@string/password"
+            android:textColor="@color/text_color_black"
+            app:drawableStartCompat="@drawable/ic_lock_open_24"
+            app:drawableTint="@color/text_color_black"
+            app:layout_constraintStart_toStartOf="@+id/fragLogin_tvAccount"
+            app:layout_constraintTop_toBottomOf="@+id/fragLogin_etAccount" />
+
+        <EditText
+            android:id="@+id/fragLogin_etPassword"
+            style="@style/editText_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:autofillHints="password"
+            android:ems="10"
+            android:hint="@string/account_enter"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fragLogin_tvPassword"
+            app:layout_constraintTop_toBottomOf="@+id/fragLogin_tvPassword" />
+
+        <ImageView
+            android:id="@+id/fragLogin_imgPasswordShowHide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:src="@drawable/ic_visibility_off_24"
+            app:layout_constraintBottom_toBottomOf="@+id/fragLogin_etPassword"
+            app:layout_constraintEnd_toEndOf="@+id/fragLogin_etPassword"
+            app:layout_constraintTop_toTopOf="@+id/fragLogin_etPassword" />
+
+        <TextView
+            android:id="@+id/fragLogin_tvForgetPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="8dp"
+            android:text="@string/forget_password"
+            android:textColor="@color/text_color_red"
+            app:layout_constraintEnd_toEndOf="@+id/fragLogin_etPassword"
+            app:layout_constraintTop_toBottomOf="@+id/fragLogin_etPassword" />
+
+        <TextView
+            android:id="@+id/fragLogin_tvAccountError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="@string/account_non_email_format"
+            android:textColor="@color/text_color_red"
+            android:visibility="invisible"
+            app:drawableStartCompat="@drawable/ic_cancel_24"
+            app:layout_constraintStart_toStartOf="@+id/fragLogin_etAccount"
+            app:layout_constraintTop_toBottomOf="@+id/fragLogin_etAccount" />
+
+        <TextView
+            android:id="@+id/fragLogin_tvPasswordError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="@string/password_too_short"
+            android:textColor="@color/text_color_red"
+            android:visibility="invisible"
+            app:drawableStartCompat="@drawable/ic_cancel_24"
+            app:layout_constraintStart_toStartOf="@+id/fragLogin_etPassword"
+            app:layout_constraintTop_toBottomOf="@+id/fragLogin_etPassword" />
+
+        <Button
+            android:id="@+id/fragLogin_btnLogin"
+            style="@style/button_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@string/login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/fragLogin_etPassword"
+            app:layout_constraintStart_toStartOf="@+id/fragLogin_etPassword" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

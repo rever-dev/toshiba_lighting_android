@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg_center"
+    android:backgroundTint="@color/white"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <NumberPicker
+        android:id="@+id/groupSel_picker"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:solidColor="@color/white"
+        android:theme="@style/NumberPicker.Theme.Group"
+        app:layout_constraintBottom_toTopOf="@+id/groupSel_tvCustom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:background="#52686868"
+        app:layout_constraintBottom_toBottomOf="@+id/groupSel_picker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/groupSel_picker">
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/groupSel_tvCustom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:padding="8dp"
+        android:text="@string/addNewGroup"
+        android:textColor="@color/ios_blue"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/groupSel_tvConfirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupSel_picker" />
+
+    <TextView
+        android:id="@+id/groupSel_tvConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="4dp"
+        android:padding="8dp"
+        android:paddingStart="12dp"
+        android:paddingTop="12dp"
+        android:text="@string/confirm"
+        android:textColor="@color/ios_blue"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/groupSel_tvCancel"
+        app:layout_constraintTop_toBottomOf="@+id/groupSel_tvCustom" />
+
+    <TextView
+        android:id="@+id/groupSel_tvCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:text="@string/cancel"
+        android:textColor="@color/ios_blue"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/groupSel_tvConfirm"
+        app:layout_constraintEnd_toStartOf="@+id/groupSel_tvConfirm"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/groupSel_tvConfirm" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/group_selector_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/groupSel_picker"
+        app:layout_constraintEnd_toEndOf="@+id/groupSel_picker"
+        app:layout_constraintStart_toStartOf="@+id/groupSel_picker"
+        app:layout_constraintTop_toTopOf="@+id/groupSel_picker">
+
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="currentVersion">當前版本：</string>
+    <string name="signAccount">登入帳號：</string>
+
+    <string name="example">example</string>
+
+    <string name="scene">情境</string>
+    <string name="device">裝置</string>
+    <string name="more">更多</string>
+
+    <string name="account">帳號</string>
+    <string name="account_enter">請輸入帳號</string>
+    <string name="account_non_email_format">帳號非信箱格式</string>
+
+    <string name="password">密碼</string>
+    <string name="password_enter">請輸入密碼</string>
+    <string name="password_too_short">密碼至少為八位</string>
+
+    <string name="login">登入</string>
+    <string name="login_success">登入成功</string>
+    <string name="login_fail">登入失敗</string>
+    <string name="logout">登出</string>
+
+    <string name="register">註冊</string>
+    <string name="register_success">註冊成功</string>
+    <string name="register_fail">註冊失敗</string>
+    <string name="register_member">註冊會員</string>
+
+    <string name="forget_password">忘記密碼</string>
+
+
+    <string name="connectWifiTo">連接 WiFi 到：</string>
+    <string name="noWifiAvailable">沒有可用 WiFi</string>
+    <string name="enterWiFiPassword">請輸入WiFi密碼</string>
+
+    <string name="confirm">確認</string>
+    <string name="cancel">取消</string>
+    <string name="back">返回</string>
+
+    <string name="pair">配對</string>
+    <string name="findFollowingDevices">找到以下裝置</string>
+    <string name="pressToSelectGroup">點選以選擇房間</string>
+    <string name="pleasSelectDevice">請至少選擇一個房間</string>
+    <string name="customYourGroup">請輸入新房間名稱</string>
+    <string name="customYourGroupHint">新房間名稱</string>
+
+    <string name="addNewGroup">自訂房間</string>
+
+    <string name="mode50">節能</string>
+    <string name="mode51">全光</string>
+    <string name="mode53">夜燈</string>
+
+</resources>
