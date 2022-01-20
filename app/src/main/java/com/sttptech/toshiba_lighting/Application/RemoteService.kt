@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.orhanobut.logger.Logger
 import com.sttptech.toshiba_lighting.AppUtil.KeyOfShp
 import com.sttptech.toshiba_lighting.RetrofitUtil.APIService
 import com.sttptech.toshiba_lighting.RetrofitUtil.RetrofitUtil
@@ -16,49 +17,41 @@ import java.util.*
 
 
 class RemoteService(var context: Context) : DataSource.RemoteData {
-
+    
     companion object {
         private const val TAG: String = "RemoteService"
     }
-
+    
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(APIService.BASE_URL)
         .client(RetrofitUtil.getUnsafeOkHttpClient())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-
+    
     override fun memberLogin(account: String, password: String): ServerResponse? {
         val service = retrofit.create(APIService.Member::class.java)
         val jsMain = JsonObject()
         val jsParms = JsonObject()
-
+        
         jsParms.addProperty("acct", account)
         jsParms.addProperty("bizPcode", "GTOEM900_113")
         jsParms.addProperty("pwd", password)
         jsParms.addProperty("sso", false)
         jsParms.addProperty("svt", "A")
         jsMain.add("parms", jsParms)
-
-        Log.d(
-            TAG,
-            "\n＊＊＊＊＊ MEMBER LOGIN REQUEST ＊＊＊＊＊" +
-                    "\n$jsMain" +
-                    "\n＊＊＊＊＊ member login request ＊＊＊＊＊"
-        )
-
+        
+        Logger.d("Member login request")
+        Logger.json(jsMain.toString())
+        
         val call = service.memberLogin(RetrofitUtil.getRequestBody(jsMain))
         return try {
             val jsonResponse = call!!.execute().body()!!.string()
-
-            Log.d(
-                TAG,
-                "\n＊＊＊＊＊ MEMBER LOGIN RESPONSE ＊＊＊＊＊" +
-                        "\n$jsonResponse" +
-                        "\n＊＊＊＊＊ member login response ＊＊＊＊＊"
-            )
-
+            
+            Logger.d("Member login response")
+            Logger.json(jsonResponse)
+            
             Gson().fromJson(jsonResponse, ServerResponse::class.java)
-
+            
         } catch (e: IOException) {
             e.printStackTrace()
             null
@@ -67,43 +60,35 @@ class RemoteService(var context: Context) : DataSource.RemoteData {
             null
         }
     }
-
+    
     override fun getInfoList(): InfoListRes? {
         val service = retrofit.create(APIService.Device::class.java)
-
+        
         // 獲取登入時 Member token
         val token: String? =
             context.getSharedPreferences(KeyOfShp.SHP_NAME, Context.MODE_PRIVATE)
                 .getString(KeyOfShp.SHP_TOKEN, null)
-
+        
         // 請求頭
         val headerMap: MutableMap<String?, String?> = HashMap()
         val strHeader = "Bearer $token"
         headerMap["Authorization"] = strHeader
-
+        
         // 放入請求體
         val jsMain = JsonObject()
-
-        Log.d(
-            TAG,
-            "\n＊＊＊＊＊ GET INFO LIST REQUEST ＊＊＊＊＊" +
-                    "\n$jsMain" +
-                    "\n＊＊＊＊＊ get info list request ＊＊＊＊＊"
-        )
-
+        
+        Logger.d("Get info list request")
+        Logger.json("")
+        
         val call = service.getInfoList(headerMap, RetrofitUtil.getRequestBody(jsMain))
         return try {
             val jsonResponse = call!!.execute().body()!!.string()
-
-            Log.d(
-                TAG,
-                "\n＊＊＊＊＊ GET INFO LIST RESPONSE ＊＊＊＊＊" +
-                        "\n$jsonResponse" +
-                        "\n＊＊＊＊＊ get info list response ＊＊＊＊＊"
-            )
-
+            
+            Logger.d("Get info list response")
+            Logger.json(jsonResponse)
+            
             Gson().fromJson(jsonResponse, InfoListRes::class.java)
-
+            
         } catch (e: IOException) {
             e.printStackTrace()
             null
@@ -112,7 +97,7 @@ class RemoteService(var context: Context) : DataSource.RemoteData {
             null
         }
     }
-
+    
     /**
      * 註冊裝置
      *
@@ -128,19 +113,19 @@ class RemoteService(var context: Context) : DataSource.RemoteData {
         model: String
     ): ServerResponse? {
         val service = retrofit.create(APIService.Device::class.java)
-
+        
         // 獲取登入時 Member token
         val token: String? =
             context.getSharedPreferences(KeyOfShp.SHP_NAME, Context.MODE_PRIVATE)
                 .getString(KeyOfShp.SHP_TOKEN, null)
-
+        
         // 請求頭
         val headerMap: MutableMap<String?, String?> = HashMap()
         val strHeader = "Bearer $token"
         headerMap["Authorization"] = strHeader
-
+        
         // 放入請求體
-
+        
         // Json body
         val jsMain = JsonObject()
         val jsParms = JsonObject()
@@ -150,27 +135,19 @@ class RemoteService(var context: Context) : DataSource.RemoteData {
         jsParms.addProperty("devSn", mac)
         jsParms.addProperty("prodScode", model)
         jsMain.add("parms", jsParms)
-
-        Log.d(
-            TAG,
-            "\n＊＊＊＊＊ DEVICE SIGN UP REQUEST ＊＊＊＊＊" +
-                    "\n$jsMain" +
-                    "\n＊＊＊＊＊ device sign up request ＊＊＊＊＊"
-        )
-
+        
+        Logger.d("Device sign up request")
+        Logger.json(jsMain.toString())
+        
         val call = service.devSignUp(headerMap, RetrofitUtil.getRequestBody(jsMain))
         return try {
             val jsonResponse = call!!.execute().body()!!.string()
-
-            Log.d(
-                TAG,
-                "\n＊＊＊＊＊ DEVICE SIGN UP RESPONSE ＊＊＊＊＊" +
-                        "\n$jsonResponse" +
-                        "\n＊＊＊＊＊ device sign up response ＊＊＊＊＊"
-            )
-
+            
+            Logger.d("Device sign up response")
+            Logger.json(jsonResponse)
+            
             Gson().fromJson(jsonResponse, ServerResponse::class.java)
-
+            
         } catch (e: IOException) {
             e.printStackTrace()
             null

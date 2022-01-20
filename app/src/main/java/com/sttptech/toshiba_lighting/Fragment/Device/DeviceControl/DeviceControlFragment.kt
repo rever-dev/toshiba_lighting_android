@@ -1,7 +1,6 @@
 package com.sttptech.toshiba_lighting.Fragment.Device.DeviceControl
 
 import android.annotation.SuppressLint
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sttptech.toshiba_lighting.R
 import com.sttptech.toshiba_lighting.databinding.FragmentDeviceControlBinding
 
-class DeviceControlFragment : Fragment() {
+class DeviceControlFragment : Fragment(), View.OnClickListener {
 
     companion object {
 
@@ -34,12 +33,13 @@ class DeviceControlFragment : Fragment() {
     ): View {
         vb = FragmentDeviceControlBinding.inflate(inflater, container, false)
         return vb.root
-//        return inflater.inflate(R.layout.fragment_device_control, container, false)
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // set mode 50, 51, 53 icon, content text
         vb.devConModebtn50.setIcon(resources.getDrawable(R.drawable.button_ic_flash, null))
         vb.devConModebtn51.setIcon(resources.getDrawable(R.drawable.button_ic_sun, null))
         vb.devConModebtn53.setIcon(resources.getDrawable(R.drawable.button_ic_moon, null))
@@ -72,6 +72,33 @@ class DeviceControlFragment : Fragment() {
 
         vb.devConBtnB.setOnClickListener {
             btnBTrigger()
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+
+            // Tool bar
+            R.id.devCon_tvBack -> { }
+            R.id.devCon_ibtSetting -> { }
+            R.id.devCon_ibtSwitch -> { }
+
+            // Main mode
+            R.id.devCon_modebtn50 -> { }
+            R.id.devCon_modebtn51 -> { }
+            R.id.devCon_modebtn53 -> { }
+
+            // RGB button
+            R.id.devCon_btnR -> { }
+            R.id.devCon_btnRAdd -> { }
+            R.id.devCon_btnRLess -> { }
+            R.id.devCon_btnG -> { }
+            R.id.devCon_btnGAdd -> { }
+            R.id.devCon_btnGLess -> { }
+            R.id.devCon_btnB -> { }
+            R.id.devCon_btnBAdd -> { }
+            R.id.devCon_btnBLess -> { }
+
         }
     }
 
@@ -147,4 +174,6 @@ class DeviceControlFragment : Fragment() {
         vb.devConBtnBAdd.visibility = View.VISIBLE
         vb.devConBtnBLess.visibility = View.VISIBLE
     }
+
+
 }
