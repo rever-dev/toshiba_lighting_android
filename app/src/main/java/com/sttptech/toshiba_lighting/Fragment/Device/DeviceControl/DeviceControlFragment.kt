@@ -105,7 +105,7 @@ class DeviceControlFragment : Fragment(), View.OnClickListener {
     fun modeChange() {
         vb.devConLinlayMainBar.visibility = View.INVISIBLE
         vb.devConLinlayNightMode.visibility = View.INVISIBLE
-        vb.devConCoslayRGBBtn.visibility = View.INVISIBLE
+        vb.devConConslayRGBBtn.visibility = View.INVISIBLE
         vb.devConBtnR.visibility = View.VISIBLE
         vb.devConBtnG.visibility = View.VISIBLE
         vb.devConBtnB.visibility = View.VISIBLE
@@ -119,12 +119,12 @@ class DeviceControlFragment : Fragment(), View.OnClickListener {
 
     fun mainMode() {
         vb.devConLinlayMainBar.visibility = View.VISIBLE
-        vb.devConCoslayRGBBtn.visibility = View.VISIBLE
+        vb.devConConslayRGBBtn.visibility = View.VISIBLE
     }
 
     fun nightMode() {
         vb.devConLinlayNightMode.visibility = View.VISIBLE
-        vb.devConCoslayRGBBtn.visibility = View.VISIBLE
+        vb.devConConslayRGBBtn.visibility = View.VISIBLE
     }
 
     fun colorMode() {

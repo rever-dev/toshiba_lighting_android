@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/drawable-v24/dialog_bg_bottom.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable-v24/radiogroup_bg_white.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable-v24/seekbar_progress_drawable_mbr.xml" value="0.3546875" />
@@ -26,13 +27,14 @@
         <entry key="app/src/main/res/drawable/switch_track_gray.xml" value="0.3546875" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.17873892652423137" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/button_custom_mode.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/button_custom_mode.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/button_mode.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/dialogfrag_connect_to_wifi.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/dialogfrag_edittext.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/dialogfrag_group_selector.xml" value="0.5" />
         <entry key="app/src/main/res/layout/dialogfrag_pair_device.xml" value="0.334375" />
-        <entry key="app/src/main/res/layout/fragment_device_control.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_device_control.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_device_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.2942708333333333" />

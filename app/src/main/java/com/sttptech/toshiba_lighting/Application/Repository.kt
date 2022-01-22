@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.lang.NullPointerException
 
-class Repository(private val context: Context) {
+class Repository(context: Context) {
 
     val remoteS: DataSource.RemoteData
     val localS: DataSource.LocalData

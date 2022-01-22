@@ -1,6 +1,7 @@
 package com.sttptech.toshibalight.Activity.MainActivity
 
 import android.content.Context
+import android.widget.TextView
 import androidx.work.Data
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -28,7 +29,7 @@ object EsptouchWork {
     const val KEY_RESULT = "KEY_RESULT"
     var esptouchTask: EsptouchTask? = null
     var esptouchCallback: EsptouchCallback? = null
-
+    
     class StartWork(context: Context, workerParams: WorkerParameters) :
         Worker(context, workerParams) {
         override fun doWork(): Result {

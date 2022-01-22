@@ -9,34 +9,67 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/modeBtn_imgBg"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/button_empty" />
-
-        <ImageView
-            android:id="@+id/modeBtn_imgIcon"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            app:layout_constraintBottom_toBottomOf="@+id/modeBtn_imgBg"
-            app:layout_constraintEnd_toEndOf="@+id/modeBtn_imgBg"
-            app:layout_constraintStart_toStartOf="@+id/modeBtn_imgBg"
-            app:layout_constraintTop_toTopOf="@+id/modeBtn_imgBg"
-            app:srcCompat="@drawable/ic_visibility_24" />
-
-        <TextView
-            android:id="@+id/modeBtn_tvName"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="mode"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.22" />
+
+        <ImageView
+            android:id="@+id/cusModeBtn_img"
+            android:layout_width="180dp"
+            android:layout_height="72dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/custom_mode" />
+
+        <TextView
+            android:id="@+id/cusModeBtn_tvNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/modeBtn_imgBg"
-            app:layout_constraintStart_toStartOf="@+id/modeBtn_imgBg"
-            app:layout_constraintTop_toBottomOf="@+id/modeBtn_imgBg" />
+            app:layout_constraintBottom_toBottomOf="@+id/cusModeBtn_img"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cusModeBtn_img"
+            tools:text="00" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7" />
+
+        <ImageButton
+            android:id="@+id/cusModeBtn_ibtEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cusModeBtn_img"
+            app:layout_constraintEnd_toEndOf="@+id/cusModeBtn_img"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_edit_12"
+            app:tint="@color/black" />
+
+        <TextView
+            android:id="@+id/cusModeBtn_tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/cusModeBtn_img"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/cusModeBtn_img"
+            tools:text="mode name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>
