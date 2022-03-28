@@ -5,7 +5,7 @@
         android:color="@color/white"/>
     <size
         android:width="6dp"
-        android:height="40dp"/>
+        android:height="44dp"/>
     <!-- corners设置圆角，只适用于rectangle @color/background_all-->
     <corners android:radius="4dp" />
     <!-- stroke设置描边 -->

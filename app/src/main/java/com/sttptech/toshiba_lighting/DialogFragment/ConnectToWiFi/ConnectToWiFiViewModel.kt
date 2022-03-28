@@ -7,14 +7,10 @@ import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.work.Data
-import androidx.work.WorkManager
 import com.espressif.iot.esptouch.util.ByteUtil
 import com.espressif.iot.esptouch.util.TouchNetUtil
 import com.sttptech.toshiba_lighting.Activity.Main.MainActivity
 import com.sttptech.toshiba_lighting.Application.BaseApplication
-import com.sttptech.toshibalight.Activity.MainActivity.EsptouchWork
-import com.sttptech.toshibalight.Activity.MainActivity.EsptouchWork.StartWork
 
 class ConnectToWiFiViewModel(application: Application) : AndroidViewModel(application) {
 

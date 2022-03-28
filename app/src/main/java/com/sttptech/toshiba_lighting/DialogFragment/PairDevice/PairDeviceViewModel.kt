@@ -12,7 +12,7 @@ import com.sttptech.toshiba_lighting.Application.BaseApplication
 import com.sttptech.toshiba_lighting.Data.Bean.CeilingLight
 import com.sttptech.toshiba_lighting.Data.Bean.Device
 import com.sttptech.toshiba_lighting.Mqtt.MqttTopic
-import com.sttptech.toshiba_lighting.Mqtt.MqttTopicAgreement
+import com.sttptech.toshiba_lighting.Mqtt.MqttTopicTag
 
 class PairDeviceViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -45,7 +45,7 @@ class PairDeviceViewModel(application: Application) : AndroidViewModel(applicati
                 Gson().toJson(json),
                 MqttTopic.DEVICE_CONFIG,
                 dev.macId,
-                MqttTopicAgreement.CONFIG
+                MqttTopicTag.CONFIG
             )
     }
 
@@ -57,7 +57,7 @@ class PairDeviceViewModel(application: Application) : AndroidViewModel(applicati
         if (checked)
             pairList.value?.add(dev)
         else
-            for (remDev: Device in pairList.value!!) {
+            for (remDev in pairList.value!!) {
                 if (dev.macId == remDev.macId) {
                     pairList.value!!.remove(remDev)
                     break
@@ -136,7 +136,7 @@ class PairDeviceViewModel(application: Application) : AndroidViewModel(applicati
                 Gson().toJson(json),
                 MqttTopic.DEVICE_CONFIG,
                 dev.macId,
-                MqttTopicAgreement.CONFIG
+                MqttTopicTag.CONFIG
             )
 
         Log.d(

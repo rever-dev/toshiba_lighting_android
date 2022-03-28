@@ -4,47 +4,79 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.36041666666666666" />
+        <entry key="../../../.gradle/caches/transforms-3/2e3da6e75774bd557e7ac82186dda3b2/transformed/jetified-colorpickerview-2.2.4/res/drawable-anydpi-v21/ic_bubble_big_colorpickerview_skydoves.xml" value="0.3155" />
+        <entry key="../../../.gradle/caches/transforms-3/2e3da6e75774bd557e7ac82186dda3b2/transformed/jetified-colorpickerview-2.2.4/res/drawable-anydpi-v21/ic_bubble_small_colorpickerview_skydoves.xml" value="0.3155" />
+        <entry key="../../../.gradle/caches/transforms-3/2e3da6e75774bd557e7ac82186dda3b2/transformed/jetified-colorpickerview-2.2.4/res/layout/dialog_colorpicker_colorpickerview_skydoves.xml" value="0.22780797101449277" />
+        <entry key="../../../.gradle/caches/transforms-3/2e3da6e75774bd557e7ac82186dda3b2/transformed/jetified-colorpickerview-2.2.4/res/layout/flag_bubble_colorpickerview_skydoves.xml" value="0.22780797101449277" />
+        <entry key="../../../.gradle/caches/transforms-3/b1aa95ab26f6e1763e1b9ea3e82669e5/transformed/material-1.5.0/res/layout/design_layout_tab_text.xml" value="0.18645833333333334" />
         <entry key="app/src/main/res/drawable-v24/dialog_bg_bottom.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable-v24/radiogroup_bg_white.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable-v24/seekbar_progress_drawable_mbr.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable-v24/switch_thumb_gray.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/button_bg.xml" value="0.3478038815117467" />
         <entry key="app/src/main/res/drawable/button_bg_identify.xml" value="0.3546875" />
+        <entry key="app/src/main/res/drawable/camera.xml" value="0.295" />
+        <entry key="app/src/main/res/drawable/container_bg_ios.xml" value="0.315" />
         <entry key="app/src/main/res/drawable/dialog_bg_center.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/drawable/divider_device_list.xml" value="0.315" />
+        <entry key="app/src/main/res/drawable/divider_gray.xml" value="0.3155" />
         <entry key="app/src/main/res/drawable/edittext_bg.xml" value="0.3478038815117467" />
         <entry key="app/src/main/res/drawable/group_selector_bg.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/drawable/ic_camera_36.xml" value="0.295" />
         <entry key="app/src/main/res/drawable/ic_lightbulb_36.xml" value="0.3546875" />
+        <entry key="app/src/main/res/drawable/ic_pause_24.xml" value="0.3155" />
+        <entry key="app/src/main/res/drawable/ic_play_arrow_24.xml" value="0.3155" />
         <entry key="app/src/main/res/drawable/ic_settings_24.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/ic_settings_36.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/image_wifi_connected_60.xml" value="0.3546875" />
+        <entry key="app/src/main/res/drawable/mode_button_selector.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/radiogroup_bg_white.xml" value="0.315" />
+        <entry key="app/src/main/res/drawable/seekbar_progress_drawable_mbr.xml" value="0.1495" />
         <entry key="app/src/main/res/drawable/seekbar_progress_drawable_mc.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/seekbar_thumb.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/switch_thumb.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/switch_thumb_blue.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/switch_thumb_gray.xml" value="0.3546875" />
+        <entry key="app/src/main/res/drawable/switch_thumb_green.xml" value="0.315" />
         <entry key="app/src/main/res/drawable/switch_track.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/switch_track_blue.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/switch_track_gray.xml" value="0.3546875" />
+        <entry key="app/src/main/res/drawable/switch_track_green.xml" value="0.315" />
+        <entry key="app/src/main/res/drawable/tablayout_indicator.xml" value="0.315" />
+        <entry key="app/src/main/res/drawable/textview_bg_enable.xml" value="0.3155" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.17873892652423137" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/button_custom_mode.xml" value="0.55" />
         <entry key="app/src/main/res/layout/button_mode.xml" value="0.30833333333333335" />
+        <entry key="app/src/main/res/layout/c_d_t_picker_dialog_fragment.xml" value="0.1889564336372847" />
+        <entry key="app/src/main/res/layout/device_settings_fragment.xml" value="0.42346041055718475" />
+        <entry key="app/src/main/res/layout/dialog_count_down_time_picker.xml" value="0.375" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.334375" />
+        <entry key="app/src/main/res/layout/dialog_scene_add_picture.xml" value="0.351239013671875" />
+        <entry key="app/src/main/res/layout/dialog_time_picker.xml" value="0.1308876811594203" />
         <entry key="app/src/main/res/layout/dialogfrag_connect_to_wifi.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/dialogfrag_edittext.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/dialogfrag_group_selector.xml" value="0.5" />
         <entry key="app/src/main/res/layout/dialogfrag_pair_device.xml" value="0.334375" />
-        <entry key="app/src/main/res/layout/fragment_device_control.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/fragment_device_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_device_control.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_device_list.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_device_settings.xml" value="0.1884498480243161" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.2942708333333333" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.334375" />
-        <entry key="app/src/main/res/layout/fragment_scene_list.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/itemview_device_list.xml" value="0.4606116774791474" />
+        <entry key="app/src/main/res/layout/fragment_scene_create.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_scene_edit.xml" value="0.1889564336372847" />
+        <entry key="app/src/main/res/layout/fragment_scene_list.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/itemview_device_list.xml" value="0.32599334716796874" />
         <entry key="app/src/main/res/layout/itemview_devicelist.xml" value="0.67" />
         <entry key="app/src/main/res/layout/itemview_pair_device.xml" value="0.6143386897404203" />
+        <entry key="app/src/main/res/layout/itemview_scene_device.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/itemview_scene_list.xml" value="0.375" />
         <entry key="app/src/main/res/layout/more_fragment.xml" value="0.2942708333333333" />
         <entry key="app/src/main/res/layout/register_fragment.xml" value="0.334375" />
+        <entry key="app/src/main/res/layout/sample_my_view.xml" value="0.1711227416992187" />
+        <entry key="app/src/main/res/layout/seekbar_indicator.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/time_picker_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.2942708333333333" />
       </map>
     </option>

@@ -2,15 +2,12 @@ package com.sttptech.toshiba_lighting.Activity.Member
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.sttptech.toshiba_lighting.Activity.Main.MainActivity
-import com.sttptech.toshiba_lighting.AppUtil.KeyOfShp
+import com.sttptech.toshiba_lighting.AppUtil.AppKey
 import com.sttptech.toshiba_lighting.AppUtil.PermissionUtil
-import com.sttptech.toshiba_lighting.CustomView.LoadingView
 import com.sttptech.toshiba_lighting.R
-import java.util.jar.Manifest
 
 class MemberActivity : AppCompatActivity() {
 
@@ -29,10 +26,10 @@ class MemberActivity : AppCompatActivity() {
     }
 
     private fun checkLoginStatus(): Boolean {
-        applicationContext.getSharedPreferences(KeyOfShp.SHP_NAME, MODE_PRIVATE).apply {
-            return getBoolean(KeyOfShp.SHP_LOGIN, false) &&
-                    getString(KeyOfShp.SHP_ACCOUNT, null) != null &&
-                    getString(KeyOfShp.SHP_TOKEN, null) != null
+        applicationContext.getSharedPreferences(AppKey.SHP_NAME, MODE_PRIVATE).apply {
+            return getBoolean(AppKey.SHP_LOGIN, false) &&
+                    getString(AppKey.SHP_ACCOUNT, null) != null &&
+                    getString(AppKey.SHP_TOKEN, null) != null
         }
     }
 
@@ -40,7 +37,7 @@ class MemberActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        PermissionUtil.requestPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+        PermissionUtil.requestPermission(this, PermissionUtil.PERMISSION_REQUEST_FINE_LOCATION)
 
         if (checkLoginStatus())
             startMainActivity()

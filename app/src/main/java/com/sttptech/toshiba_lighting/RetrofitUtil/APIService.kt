@@ -1,11 +1,10 @@
 package com.sttptech.toshiba_lighting.RetrofitUtil
 
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.HeaderMap
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface APIService {
 
@@ -64,7 +63,7 @@ interface APIService {
         fun devDelete(
             @HeaderMap headers: Map<String?, String?>?,
             @Body responseBody: RequestBody?
-        ): Call<ResponseBody?>?
+        ): Call<ResponseBody?>
 
         /**
          * 裝置設定資訊
@@ -82,17 +81,19 @@ interface APIService {
         fun devModify(
             @HeaderMap headers: Map<String?, String?>?,
             @Body responseBody: RequestBody?
-        ): Call<ResponseBody?>?
-
+        ): Call<ResponseBody?>
+    }
+    
+    interface Group {
         /**
          * 群組新增
          */
         @POST("terminal/devgroup/add")
-        fun groupAdd(
+        fun createGroup(
             @HeaderMap headers: Map<String?, String?>?,
             @Body responseBody: RequestBody?
-        ): Call<ResponseBody?>?
-
+        ): Call<ResponseBody?>
+    
         /**
          * 群組異動
          */
@@ -100,7 +101,7 @@ interface APIService {
         fun groupModify(
             @HeaderMap headers: Map<String?, String?>?,
             @Body responseBody: RequestBody?
-        ): Call<ResponseBody?>?
+        ): Call<ResponseBody?>
     }
 
     interface Scene {
@@ -112,7 +113,7 @@ interface APIService {
         fun sceneAdd(
             @HeaderMap headers: Map<String?, String?>?,
             @Body responseBody: RequestBody?
-        ): Call<ResponseBody?>?
+        ): Call<ResponseBody?>
 
         /**
          * 刪除情境
@@ -121,7 +122,7 @@ interface APIService {
         fun sceneDelete(
             @HeaderMap headers: Map<String?, String?>?,
             @Body responseBody: RequestBody?
-        ): Call<ResponseBody?>?
+        ): Call<ResponseBody?>
 
         /**
          * 情境異動
@@ -131,5 +132,17 @@ interface APIService {
             @HeaderMap headers: Map<String?, String?>?,
             @Body responseBody: RequestBody?
         ): Call<ResponseBody?>?
+    
+        /** 獲取情境圖片 */
+        @GET
+        fun downloadSceneImage(@Url imageUrl: String?): Call<ResponseBody?>
+    
+        @Multipart
+        @POST("terminal/grsituation/modify/{uUid}")
+        fun sceneImgUpdate(
+            @HeaderMap headers: Map<String?, String?>?,
+            @Path("uUid") uUid: String?,
+            @Part file: MultipartBody.Part?
+        ): Call<ResponseBody?>
     }
 }

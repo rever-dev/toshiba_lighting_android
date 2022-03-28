@@ -24,4 +24,15 @@ class ExampleUnitTest {
         val day = total / 60 / 60 / 24
         print("$day 天 $hour 時 $min 分 $sec 秒")
     }
+    
+    @Test
+    fun toStr() {
+        val list: List<String?> = listOf("1", "2", "3", null)
+        println("\"${list.toString()}\"")
+    }
+    
+    @Test
+    fun currentTime() {
+        println(System.currentTimeMillis())
+    }
 }

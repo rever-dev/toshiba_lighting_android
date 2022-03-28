@@ -1,5 +1,5 @@
 package com.sttptech.toshiba_lighting.Mqtt
 
-enum class MqttTopicAgreement {
+enum class MqttTopicTag {
     CONFIG, CONTROL, STATUS
 }

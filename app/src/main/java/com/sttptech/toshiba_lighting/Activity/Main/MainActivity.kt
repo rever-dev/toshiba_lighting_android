@@ -1,28 +1,32 @@
 package com.sttptech.toshiba_lighting.Activity.Main
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.espressif.iot.esptouch.EsptouchTask
-import com.espressif.iot.esptouch.IEsptouchResult
+import com.espressif.iot.esptouch2.provision.EspProvisioner
+import com.espressif.iot.esptouch2.provision.EspProvisioningListener
+import com.espressif.iot.esptouch2.provision.EspProvisioningRequest
+import com.espressif.iot.esptouch2.provision.EspProvisioningResult
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.orhanobut.logger.Logger
-import com.sttptech.toshiba_lighting.AppUtil.KeyOfShp
+import com.sttptech.toshiba_lighting.AppUtil.AppKey
 import com.sttptech.toshiba_lighting.AppUtil.PermissionUtil
 import com.sttptech.toshiba_lighting.Application.BaseApplication
 import com.sttptech.toshiba_lighting.Data.Bean.CeilingLight
 import com.sttptech.toshiba_lighting.Data.Bean.Group
+import com.sttptech.toshiba_lighting.Data.Bean.Scene
 import com.sttptech.toshiba_lighting.DialogFragment.PairDevice.PairDeviceDialogFragment
 import com.sttptech.toshiba_lighting.Fragment.Device.DeviceList.DeviceListFragment
 import com.sttptech.toshiba_lighting.Mqtt.MqttClient
 import com.sttptech.toshiba_lighting.Mqtt.MqttTopic
-import com.sttptech.toshiba_lighting.Mqtt.MqttTopicAgreement
+import com.sttptech.toshiba_lighting.Mqtt.MqttTopicTag
 import com.sttptech.toshiba_lighting.R
 import com.sttptech.toshiba_lighting.RetrofitUtil.InfoListRes
 import org.eclipse.paho.client.mqttv3.MqttException
@@ -50,33 +54,49 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
+    
         val bottomNav = findViewById<BottomNavigationView>(R.id.main_bottomNav)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.main_fragContainer) as NavHostFragment?
         val navController = navHostFragment!!.navController
         NavigationUI.setupWithNavController(bottomNav, navController)
-        
+    
+    
+        // 檢查 如果是在以下頁面無法使用Navigation
+        val dcl =
+            NavController.OnDestinationChangedListener { controller: NavController?, destination: NavDestination, arguments: Bundle? ->
+                val idList: MutableList<Int> = ArrayList()
+                idList.add(R.id.deviceControlFragment)
+                idList.add(R.id.deviceSettingsFragment)
+                idList.add(R.id.sceneCreateFragment)
+                if (idList.contains(destination.id)) {
+                    bottomNav.visibility = View.GONE
+                } else {
+                    bottomNav.visibility = View.VISIBLE
+                }
+            }
+        navController.addOnDestinationChangedListener(dcl)
+    
         PermissionUtil.requestPermission(
             this,
-            android.Manifest.permission.ACCESS_FINE_LOCATION
+            PermissionUtil.PERMISSION_REQUEST_FINE_LOCATION
         )
-        
-        checkLoginStatus()
-        getDataFromServer()
+    
+        if (checkLoginStatus())
+            getDataFromServer()
     }
     
     private fun checkLoginStatus(): Boolean {
-        applicationContext.getSharedPreferences(KeyOfShp.SHP_NAME, MODE_PRIVATE).apply {
+        applicationContext.getSharedPreferences(AppKey.SHP_NAME, MODE_PRIVATE).apply {
             Logger.i(
-                "\nLogin: ${getBoolean(KeyOfShp.SHP_LOGIN, false)}" +
-                        "\nAccount: ${getString(KeyOfShp.SHP_ACCOUNT, null)}" +
-                        "\nToken: ${getString(KeyOfShp.SHP_TOKEN, null)}"
+                "\nLogin: ${getBoolean(AppKey.SHP_LOGIN, false)}" +
+                        "\nAccount: ${getString(AppKey.SHP_ACCOUNT, null)}" +
+                        "\nToken: ${getString(AppKey.SHP_TOKEN, null)}"
             )
-            
-            return getBoolean(KeyOfShp.SHP_LOGIN, false) &&
-                    getString(KeyOfShp.SHP_ACCOUNT, null) != null &&
-                    getString(KeyOfShp.SHP_TOKEN, null) != null
+        
+            return getBoolean(AppKey.SHP_LOGIN, false) &&
+                    getString(AppKey.SHP_ACCOUNT, null) != null &&
+                    getString(AppKey.SHP_TOKEN, null) != null
         }
     }
     
@@ -87,6 +107,8 @@ class MainActivity : AppCompatActivity(),
             val info = remoteService.getInfoList()
             if (info != null) {
                 syncDevice2DB(info)
+                syncGroup2DB(info)
+                syncScene2DB(info)
             }
             runOnUiThread { dismissLoading() }
         }.start()
@@ -143,14 +165,52 @@ class MainActivity : AppCompatActivity(),
                     break
                 }
             }
-            
+    
             BaseApplication.mqttClient.subscribeTopic(
                 device.model!!,
                 device.macId,
-                MqttTopicAgreement.STATUS
+                MqttTopicTag.STATUS
             )
-            
+    
             BaseApplication.repository.localS.insertCeilingLight(device)
+        }
+    }
+    
+    /**
+     * sync groups data to DB
+     */
+    private fun syncGroup2DB(response: InfoListRes) {
+        // Clear DB data
+        BaseApplication.repository.localS.clearGroupTable()
+        
+        for (ownGroups in response.datum.ownGroups) {
+            val group = Group(ownGroups.groupName)
+            
+            group.groupUuid = ownGroups.groupUuid
+            group.groupDef = ownGroups.groupDef
+            group.devUuids = ownGroups.devUuids
+            
+            BaseApplication.repository.localS.insertGroup(group)
+        }
+    }
+    
+    private fun syncScene2DB(info: InfoListRes) {
+        // Clear DB data
+        BaseApplication.repository.localS.clearSceneTable()
+        
+        for (ownScene in info.datum.ownGrsituations) {
+            val scene = Scene(ownScene.grsituationUuid)
+            scene.name = ownScene.grsituationName
+            scene.seq = ownScene.grsituationSeq
+            scene.def = ownScene.grsituationDef
+            scene.devUuids = ownScene.devUuids
+            scene.order = ownScene.grsituationOrder
+            scene.imageUrl = ownScene.grsituationImage
+            
+            if (scene.imageUrl != null && scene.imageUrl!!.isNotEmpty())
+                scene.image = BaseApplication.repository.remoteS.getSceneImage(scene.imageUrl!!)
+            
+            BaseApplication.repository.localS.insertScene(scene)
         }
     }
     
@@ -210,67 +270,141 @@ class MainActivity : AppCompatActivity(),
 //    }
 //
     
-    private var espTask: EsptouchTask? = null
+    private var espV2Task: EspProvisioner? = null
     
     fun esptouchStart(ssid: ByteArray, bssid: ByteArray, pwd: ByteArray, context: Context) {
         showLoading()
         BaseApplication.mqttClient.mqttCallbackListener = this
-        if (espTask == null) {
+        if (espV2Task == null) {
             Thread {
-                espTask = EsptouchTask(ssid, bssid, pwd, context)
-                espTask?.setEsptouchListener { result: IEsptouchResult -> resultMqttEvent(result) }
-                // TODO: 2022/1/13 result not used
-                var result = espTask?.executeForResults(-1)
+                espV2Task = EspProvisioner(this)
+                val espReq = EspProvisioningRequest.Builder(this)
+                    .setSSID(ssid)
+                    .setBSSID(bssid)
+                    .setPassword(pwd)
+                    .setReservedData(null)
+                    .build()
+            
+                espV2Task!!.startProvisioning(espReq, object : EspProvisioningListener {
+                    override fun onStart() {
+                    
+                    }
                 
-                BaseApplication.mqttClient.mqttCallbackListener = null
-                espTask = null
+                    override fun onResponse(result: EspProvisioningResult?) {
+                        if (result == null) return
+                    
+                        val bssid = result.bssid.uppercase().replace(":", "")
+                    
+                        val json = JsonObject()
+                        json.addProperty("config", "CONFIGURATION")
+                    
+                        try {
+                            BaseApplication.mqttClient.subscribeTopic(
+                                MqttTopic.DEVICE_CONFIG,
+                                bssid,
+                                MqttTopicTag.CONFIG
+                            )
+                        } catch (e: MqttException) {
+                            e.printStackTrace()
+                        }
+                        try {
+                            synchronized(this) { Thread.sleep(2_000) }
+                        } catch (e: InterruptedException) {
+                            e.printStackTrace()
+                        }
+                        BaseApplication.mqttClient.sendMsg(
+                            Gson().toJson(json),
+                            MqttTopic.DEVICE_CONFIG,
+                            bssid,
+                            MqttTopicTag.CONFIG
+                        )
+                    
+                    }
                 
-                if (!result!![0].isSuc) {
-                    dismissLoading()
-                    // TODO: 2022/1/13 change to AlertDialog 
-                    runOnUiThread { Toast.makeText(this, "no search any device.", Toast.LENGTH_SHORT).show() }
-                }
+                    override fun onStop() {
+                    
+                    }
+                
+                    override fun onError(e: java.lang.Exception?) {
+                    
+                    }
+                })
+            
+            
             }.start()
         }
-        
-        Logger.i("EspTouch Start")
+    
     }
     
     fun esptouchStop() {
-        if (espTask != null && !espTask!!.isCancelled) {
-            espTask?.interrupt()
-            dismissLoading()
+        if (espV2Task != null) {
+            espV2Task!!.stopProvisioning()
+            espV2Task = null
         }
-        
-        Logger.i("EspTouch interrupt")
     }
-    
-    private fun resultMqttEvent(result: IEsptouchResult) {
-        
-        val json = JsonObject()
-        json.addProperty("config", "CONFIGURATION")
-        
-        try {
-            BaseApplication.mqttClient.subscribeTopic(
-                MqttTopic.DEVICE_CONFIG,
-                result.bssid.uppercase(),
-                MqttTopicAgreement.CONFIG
-            )
-        } catch (e: MqttException) {
-            e.printStackTrace()
-        }
-        try {
-            synchronized(this) { Thread.sleep(2_000) }
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-        BaseApplication.mqttClient.sendMsg(
-            Gson().toJson(json),
-            MqttTopic.DEVICE_CONFIG,
-            result.bssid.uppercase(),
-            MqttTopicAgreement.CONFIG
-        )
-    }
+
+//    private var espTask: EsptouchTask? = null
+//
+//    fun esptouchStart(ssid: ByteArray, bssid: ByteArray, pwd: ByteArray, context: Context) {
+//        showLoading()
+//        BaseApplication.mqttClient.mqttCallbackListener = this
+//        if (espTask == null) {
+//            Thread {
+//                espTask = EsptouchTask(ssid, bssid, pwd, context)
+//                espTask?.setEsptouchListener { result: IEsptouchResult -> resultMqttEvent(result) }
+//                // TODO: 2022/1/13 result not used
+//                var result = espTask?.executeForResults(-1)
+//
+//                BaseApplication.mqttClient.mqttCallbackListener = null
+//                espTask = null
+//
+//                if (!result!![0].isSuc) {
+//                    dismissLoading()
+//                    // TODO: 2022/1/13 change to AlertDialog
+//                    runOnUiThread { Toast.makeText(this, "no search any device.", Toast.LENGTH_SHORT).show() }
+//                }
+//            }.start()
+//        }
+//
+//        Logger.i("EspTouch Start")
+//    }
+//
+//    fun esptouchStop() {
+//        if (espTask != null && !espTask!!.isCancelled) {
+//            espTask?.interrupt()
+//            dismissLoading()
+//
+//            Logger.i("EspTouch interrupt")
+//        }
+//
+//    }
+//
+//    private fun resultMqttEvent(result: IEsptouchResult) {
+//
+//        val json = JsonObject()
+//        json.addProperty("config", "CONFIGURATION")
+//
+//        try {
+//            BaseApplication.mqttClient.subscribeTopic(
+//                MqttTopic.DEVICE_CONFIG,
+//                result.bssid.uppercase(),
+//                MqttTopicTag.CONFIG
+//            )
+//        } catch (e: MqttException) {
+//            e.printStackTrace()
+//        }
+//        try {
+//            synchronized(this) { Thread.sleep(2_000) }
+//        } catch (e: InterruptedException) {
+//            e.printStackTrace()
+//        }
+//        BaseApplication.mqttClient.sendMsg(
+//            Gson().toJson(json),
+//            MqttTopic.DEVICE_CONFIG,
+//            result.bssid.uppercase(),
+//            MqttTopicTag.CONFIG
+//        )
+//    }
     
     private var pairPage: PairDeviceDialogFragment? = null
     
@@ -279,7 +413,10 @@ class MainActivity : AppCompatActivity(),
      * */
     @Synchronized
     override fun msgArrived(topic: String, msg: String) {
-        if (topic.contains("AD_CONFIG")) {
+        if (
+            topic.contains("AD_CONFIG") &&
+            Gson().fromJson(msg, JsonObject::class.java).get("devicename") != null
+        ) {
             val dev = CeilingLight(topic.substring(34, 46))
             dev.model =
                 Gson().fromJson(msg, JsonObject::class.java).get("devicename").asString

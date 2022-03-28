@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/deviceControlFragment">
+    app:startDestination="@id/moreFragment">
 
     <fragment
         android:id="@+id/moreFragment"
@@ -14,14 +14,62 @@
         android:id="@+id/deviceListFragment"
         android:name="com.sttptech.toshiba_lighting.Fragment.Device.DeviceList.DeviceListFragment"
         android:label="fragment_device_list"
-        tools:layout="@layout/fragment_device_list" />
+        tools:layout="@layout/fragment_device_list" >
+        <action
+            android:id="@+id/action_deviceListFragment_to_deviceControlFragment"
+            app:destination="@id/deviceControlFragment"
+            app:enterAnim="@anim/anim_fragment_in"
+            app:popExitAnim="@anim/anim_fragment_out" />
+    </fragment>
     <fragment
         android:id="@+id/sceneListFragment"
         android:name="com.sttptech.toshiba_lighting.Fragment.Scene.SceneList.SceneListFragment"
         android:label="fragment_scene_list"
-        tools:layout="@layout/fragment_scene_list" />
+        tools:layout="@layout/fragment_scene_list" >
+        <action
+            android:id="@+id/action_sceneListFragment_to_sceneEditFragment"
+            app:destination="@id/sceneEditFragment"
+            app:enterAnim="@anim/anim_fragment_in"
+            app:popExitAnim="@anim/anim_fragment_out" />
+        <action
+            android:id="@+id/action_sceneListFragment_to_sceneCreateFragment"
+            app:destination="@id/sceneCreateFragment"
+            app:enterAnim="@anim/anim_fragment_in"
+            app:popExitAnim="@anim/anim_fragment_out" />
+    </fragment>
     <fragment
         android:id="@+id/deviceControlFragment"
         android:name="com.sttptech.toshiba_lighting.Fragment.Device.DeviceControl.DeviceControlFragment"
-        android:label="DeviceControlFragment" />
+        android:label="device_control_fragment">
+        <action
+            android:id="@+id/action_deviceControlFragment_to_deviceSettingsFragment"
+            app:destination="@id/deviceSettingsFragment"
+            app:enterAnim="@anim/anim_fragment_in"
+            app:popExitAnim="@anim/anim_fragment_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/deviceSettingsFragment"
+        android:name="com.sttptech.toshiba_lighting.Fragment.Device.DeviceSettings.DeviceSettingsFragment"
+        android:label="device_settings_fragment"
+        tools:layout="@layout/fragment_device_settings" />
+    <fragment
+        android:id="@+id/sceneEditFragment"
+        android:name="com.sttptech.toshiba_lighting.Fragment.Scene.SceneEdit.SceneEditFragment"
+        android:label="fragment_scene_edit"
+        tools:layout="@layout/fragment_scene_edit" >
+        <action
+            android:id="@+id/action_sceneEditFragment_to_deviceControlFragment"
+            app:destination="@id/deviceControlFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sceneCreateFragment"
+        android:name="com.sttptech.toshiba_lighting.Fragment.Scene.SceneCreate.SceneCreateFragment"
+        android:label="fragment_scene_create"
+        tools:layout="@layout/fragment_scene_create" >
+        <action
+            android:id="@+id/action_sceneCreateFragment_to_deviceControlFragment"
+            app:destination="@id/deviceControlFragment"
+            app:enterAnim="@anim/anim_fragment_in"
+            app:popExitAnim="@anim/anim_fragment_out" />
+    </fragment>
 </navigation>

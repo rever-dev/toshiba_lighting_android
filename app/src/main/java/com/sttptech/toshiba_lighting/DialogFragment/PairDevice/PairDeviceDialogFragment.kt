@@ -106,7 +106,7 @@ class PairDeviceDialogFragment(var dev: Device) : BaseDialogFragment(
                 showLoading()
                 vm.startPair()
             } else {
-                Toast.makeText(context, getString(R.string.pleasSelectDevice), Toast.LENGTH_SHORT)
+                Toast.makeText(context, getString(R.string.pleasSelectGroup), Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -120,23 +120,23 @@ class PairDeviceDialogFragment(var dev: Device) : BaseDialogFragment(
 
     override fun onStart() {
         super.onStart()
-        vm.signupStatus.observe(this, {
+        vm.signupStatus.observe(this) {
             when (it) {
                 // default
                 0 -> {}
-
+        
                 // sign & network reset finish
                 1 -> {
                     dismissLoading()
                     dismiss()
                 }
-
+        
                 // fail
                 2 -> {
                     dismissLoading()
                 }
             }
-        })
+        }
     }
 
     override fun onDestroyView() {

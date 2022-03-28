@@ -1,7 +1,6 @@
 package com.sttptech.toshibalight.Activity.MainActivity
 
 import android.content.Context
-import android.widget.TextView
 import androidx.work.Data
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -13,7 +12,7 @@ import com.sttptech.toshiba_lighting.Application.BaseApplication
 import com.sttptech.toshiba_lighting.Application.BaseApplication.Companion.mqttClient
 import com.sttptech.toshiba_lighting.Mqtt.MqttClient
 import com.sttptech.toshiba_lighting.Mqtt.MqttTopic
-import com.sttptech.toshiba_lighting.Mqtt.MqttTopicAgreement
+import com.sttptech.toshiba_lighting.Mqtt.MqttTopicTag
 import org.eclipse.paho.client.mqttv3.MqttException
 
 object EsptouchWork {
@@ -75,7 +74,7 @@ object EsptouchWork {
             mqttClient.subscribeTopic(
                 MqttTopic.DEVICE_CONFIG,
                 result.bssid.uppercase(),
-                MqttTopicAgreement.CONFIG
+                MqttTopicTag.CONFIG
             )
         } catch (e: MqttException) {
             e.printStackTrace()
@@ -89,7 +88,7 @@ object EsptouchWork {
             Gson().toJson(json),
             MqttTopic.DEVICE_CONFIG,
             result.bssid.uppercase(),
-            MqttTopicAgreement.CONFIG
+            MqttTopicTag.CONFIG
         )
     }
 }

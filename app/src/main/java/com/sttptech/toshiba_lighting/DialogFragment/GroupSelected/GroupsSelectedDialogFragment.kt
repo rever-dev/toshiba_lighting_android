@@ -5,7 +5,7 @@ import android.view.*
 import android.widget.NumberPicker
 import androidx.lifecycle.ViewModelProvider
 import com.sttptech.toshiba_lighting.DialogFragment.EditTextDialog.EditTextDialogFragment
-import com.sttptech.toshiba_lighting.DialogFragment.EditTextDialog.EditTextDialogFragment.*
+import com.sttptech.toshiba_lighting.DialogFragment.EditTextDialog.EditTextDialogFragment.OnTextInputCallback
 import com.sttptech.toshiba_lighting.DialogFragment.GroupSelected.GroupsSelectedViewModel
 import com.sttptech.toshiba_lighting.R
 import com.sttptech.toshiba_lighting.databinding.DialogfragGroupSelectorBinding
@@ -17,10 +17,7 @@ class GroupsSelectedDialogFragment : BaseDialogFragment(
     true
 ) {
 
-    companion object {
-
-        private const val TAG: String = "GroupSelector"
-    }
+    companion object { private const val TAG: String = "GroupSelector" }
 
     interface GroupSelectedCallback {
         fun onGroupSelected(group: String?)
@@ -56,36 +53,7 @@ class GroupsSelectedDialogFragment : BaseDialogFragment(
             descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
             wrapSelectorWheel = false
         }
-        vb.groupSelTvCustom.setOnClickListener {
-            EditTextDialogFragment(
-                getString(R.string.customYourGroup),
-                getString(R.string.customYourGroupHint),
-                null
-            ).apply {
-                callback = object : OnTextInputCallback {
-                    override fun onTextInput(str: String?) {
-                        if (str != null) {
-                            this@GroupsSelectedDialogFragment.let {
-                                it.vm.addGroup(str!!)
-                                it.vb.groupSelPicker.let { picker ->
-                                    picker.displayedValues = it.vm.roomList.value!!.toTypedArray()
-                                    picker.maxValue = it.vm.roomList.value!!.size - 1
-                                    picker.value = it.vm.roomList.value!!.size - 1
-                                }
-                            }
-                            with(this@GroupsSelectedDialogFragment.vb.groupSelPicker) {
-                            }
-                        }
-                    }
-                }
-            }.show(parentFragmentManager, null)
-        }
-        vb.groupSelTvCancel.setOnClickListener { dismiss() }
-        vb.groupSelTvConfirm.setOnClickListener {
-            groupSelCallback?.onGroupSelected(vm.roomList.value!![vb.groupSelPicker.value])
-            groupSelCallback = null
-            dismiss()
-        }
+        setListener()
     }
 
     override fun onDestroy() {
@@ -94,4 +62,32 @@ class GroupsSelectedDialogFragment : BaseDialogFragment(
             groupSelCallback!!.onGroupSelected(null)
     }
 
+    private fun setListener() {
+        vb.groupSelTvCancel.setOnClickListener { dismiss() }
+        vb.groupSelTvConfirm.setOnClickListener {
+            groupSelCallback?.onGroupSelected(vm.roomList.value!![vb.groupSelPicker.value])
+            groupSelCallback = null
+            dismiss()
+        }
+        vb.groupSelTvCustom.setOnClickListener {
+            EditTextDialogFragment(
+                getString(R.string.customYourGroup),
+                getString(R.string.customYourGroupHint),
+                null
+            ).apply {
+                callback = object : OnTextInputCallback {
+                    override fun onTextInput(str: String) {
+                        this@GroupsSelectedDialogFragment.let {
+                            it.vm.addGroup(str)
+                            it.vb.groupSelPicker.let { picker ->
+                                picker.displayedValues = it.vm.roomList.value!!.toTypedArray()
+                                picker.maxValue = it.vm.roomList.value!!.size - 1
+                                picker.value = it.vm.roomList.value!!.size - 1
+                            }
+                        }
+                    }
+                }
+            }.show(parentFragmentManager, null)
+        }
+    }
 }

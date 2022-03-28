@@ -1,7 +1,9 @@
 package com.sttptech.toshiba_lighting.RetrofitUtil
 
 import android.annotation.SuppressLint
+import android.content.Context
 import com.google.gson.JsonObject
+import com.sttptech.toshiba_lighting.AppUtil.AppKey
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
@@ -73,8 +75,21 @@ class RetrofitUtil {
          *
          * @param jsonObject jsonObject
          */
-        fun getRequestBody(jsonObject: JsonObject): RequestBody {
+        fun buildReqBody(jsonObject: JsonObject): RequestBody {
             return RequestBody.create(MediaType.parse("application/json"), jsonObject.toString())
+        }
+        
+        fun getHeader(context: Context): MutableMap<String?, String?> {
+            // 獲取登入時 Member token
+            val token: String? =
+                context.getSharedPreferences(AppKey.SHP_NAME, Context.MODE_PRIVATE)
+                    .getString(AppKey.SHP_TOKEN, null)
+    
+            // 請求頭
+            val headerMap: MutableMap<String?, String?> = HashMap()
+            val strHeader = "Bearer $token"
+            headerMap["Authorization"] = strHeader
+            return headerMap
         }
     }
 }

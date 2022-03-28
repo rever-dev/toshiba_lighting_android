@@ -41,14 +41,99 @@
     <string name="pair">配對</string>
     <string name="findFollowingDevices">找到以下裝置</string>
     <string name="pressToSelectGroup">點選以選擇房間</string>
-    <string name="pleasSelectDevice">請至少選擇一個房間</string>
+    <string name="pleasSelectGroup">請選擇一個房間</string>
     <string name="customYourGroup">請輸入新房間名稱</string>
     <string name="customYourGroupHint">新房間名稱</string>
+    <string name="nameIsNotEmpty">名稱不能為空</string>
 
     <string name="addNewGroup">自訂房間</string>
+
+    <string name="settings">設定</string>
+    <string name="deviceName">裝置名稱</string>
+    <string name="deviceLocation">裝置位置</string>
+    <string name="timerSettings">計時器設定</string>
+    <string name="dailyWakeUp">每日喚醒</string>
+    <string name="dailyOn">每日定時開</string>
+    <string name="dailyOff">每日定時關</string>
+    <string name="countDownTime">倒數計時</string>
+    <string name="setSleepSchedule">設定助眠模式的計時行程</string>
+    <string name="SleepSchedule">助眠時間</string>
+    <string name="setCountDownTimerState">設定計時器最終狀態</string>
+    <string name="countDownTimerState">最終狀態</string>
+    <string name="buzzer">燈具操作聲</string>
+    <string name="buzzerOnOff">開啟或關閉操作聲</string>
+    <string name="resetDescription">重置裝置會清除已除儲存的設定，並恢復原廠設定值</string>
+    <string name="reset">重置</string>
+    <string name="resetTitle">即將重置</string>
+    <string name="resetMessage">確定要將裝置重置嗎？</string>
+    <string name="deleteDescription">刪除裝置會將裝置種從系統中刪除，您無法再次控制。若需要再次加入系統中，則需要重新配對</string>
+    <string name="delete">刪除</string>
+    <string name="deleteTitle">即將刪除</string>
+    <string name="deleteMessage">確定要將裝置刪除嗎？</string>
+    <string name="renameMessage">請輸入裝置名稱</string>
+    <string name="renameSuccess">名稱修改成功</string>
+    <string name="renameFail">名稱修改失敗</string>
+    <string name="groupUpdateSuccess">群組修改成功</string>
+    <string name="groupUpdateFail">群組修改失敗</string>
+    <string name="dailyUpdateSuccess">排程已更新</string>
+    <string name="dailyUpdateFail">排程更新失敗</string>
+    <string name="deleteDevSuccess">裝置刪除成功</string>
+    <string name="deleteDevFail">裝置刪除失敗</string>
+    <string name="edit">編輯</string>
+    <string name="save">儲存</string>
+    <string name="cancelEdit">取消編輯</string>
+    <string name="editScene">編輯情境</string>
+    <string name="createScene">新增情境</string>
+    <string name="deleteScene">刪除情境</string>
+    <string name="sceneName">情境名稱</string>
+    <string name="pleaseAddPicture">請新增一張情境圖片</string>
+    <string name="availableDevice">可用的燈</string>
+    <string name="pleaseSelectAndSetupDevice">請將燈設定到欲儲存的狀態並選取</string>
+    <string name="takeThePicture">拍一張照片</string>
+    <string name="selectThePicture">選擇一張照片</string>
+    <string name="pleaseEnterSceneName">請輸入情境名稱</string>
+    <string name="sceneInsertSuccess">情境新增成功</string>
+    <string name="sceneInsertFail">情境新增失敗</string>
+    <string name="mustSelectAScene">請選擇一個情境</string>
+    <string name="sceneDeleteSuccess">情境刪除成功</string>
+    <string name="sceneDeleteFail">情境刪除失敗</string>
+
+    <!--Mode-->
+    <string name="mode01">美肌</string>
+    <string name="mode02">愜意</string>
+    <string name="mode03">劇院</string>
+    <string name="mode04">助眠</string>
+    <string name="mode05">讀書</string>
+    <string name="mode06">晨昏</string>
+    <string name="mode07">燭光</string>
+    <string name="mode08">暖感</string>
+    <string name="mode09">涼感</string>
+    <string name="mode10">彩色</string>
+    <string name="mode11">瑜珈</string>
+    <string name="mode12">全彩</string>
+
+    <string name="mode61">自訂模式1</string>
+    <string name="mode62">自訂模式2</string>
+    <string name="mode63">自訂模式3</string>
+    <string name="mode64">自訂模式4</string>
 
     <string name="mode50">節能</string>
     <string name="mode51">全光</string>
     <string name="mode53">夜燈</string>
+
+    <string name="all">全部</string>
+    <string name="commonly_used">常用</string>
+    <string name="custom_mode">自訂</string>
+
+    <string name="enterYourModeName">輸入自訂模式名稱</string>
+    <string name="modifyCustomName_success">自訂名稱修改成功</string>
+    <string name="modifyCustomName_save">自訂名稱儲存成功</string>
+    <string name="modifyCustomName_fail">自訂名稱修改失敗</string>
+
+    <!--  Time  -->
+    <string name="hours">時</string>
+    <string name="minutes">分</string>
+    <string name="seconds">秒</string>
+
 
 </resources>

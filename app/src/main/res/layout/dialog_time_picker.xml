@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg_bottom">
+
+    <NumberPicker
+        android:id="@+id/timePicker_pickAmPm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:scrollbarThumbHorizontal="@color/white"
+        android:theme="@style/NumberPicker.Theme.Group"
+        app:layout_constraintEnd_toStartOf="@+id/timePicker_pickHours"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker_tvCancel" />
+
+    <NumberPicker
+        android:id="@+id/timePicker_pickHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbarThumbHorizontal="@color/white"
+        android:theme="@style/NumberPicker.Theme.Group"
+        app:layout_constraintBottom_toBottomOf="@+id/timePicker_pickAmPm"
+        app:layout_constraintEnd_toStartOf="@+id/textView9"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/timePicker_pickAmPm"
+        app:layout_constraintTop_toTopOf="@+id/timePicker_pickAmPm" />
+
+    <NumberPicker
+        android:id="@+id/timePicker_pickMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbarThumbHorizontal="@color/white"
+        android:theme="@style/NumberPicker.Theme.Group"
+        app:layout_constraintBottom_toBottomOf="@+id/timePicker_pickHours"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toTopOf="@+id/timePicker_pickHours" />
+
+    <TextView
+        android:id="@+id/timePicker_tvCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"
+        android:text="@string/cancel"
+        android:textColor="@color/ios_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timePicker_tvConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="10dp"
+        android:text="@string/confirm"
+        android:textColor="@color/ios_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hours"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/timePicker_pickHours"
+        app:layout_constraintEnd_toStartOf="@+id/timePicker_pickMin"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/timePicker_pickHours"
+        app:layout_constraintTop_toTopOf="@+id/timePicker_pickHours" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/minutes"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/timePicker_pickMin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/timePicker_pickMin"
+        app:layout_constraintTop_toTopOf="@+id/timePicker_pickMin" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:background="@drawable/divider_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/timePicker_pickAmPm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/timePicker_pickAmPm" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

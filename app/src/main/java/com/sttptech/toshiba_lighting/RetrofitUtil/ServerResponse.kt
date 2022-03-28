@@ -2,6 +2,7 @@ package com.sttptech.toshiba_lighting.RetrofitUtil
 
 import com.google.gson.Gson
 import com.sttptech.toshiba_lighting.Data.Bean.Group
+import java.lang.StringBuilder
 
 data class ServerResponse(
     private val code: Int,
@@ -92,6 +93,26 @@ data class ServerResponse(
         var clones: List<String>? = null
         var cloneGroups: List<String>? = null
         var cloneGrsituations: List<String>? = null
+        var grsituationImage: String? = null
+        
+        fun getGroupData(): String? {
+            
+            val strBuilder = StringBuilder()
+            
+            for (i in 0 until devUuids?.size!!) {
+                if ((i + 1) == devUuids?.size)
+                    strBuilder.append("\"${devUuids!![i]}\"")
+                else
+                    strBuilder.append("\"${devUuids!![i]}\", ")
+            }
+            
+            return "{" +
+                    " \"groupUuid\" : \"$groupUuid\", \n" +
+                    " \"groupName\" : \"$groupName\", \n" +
+                    " \"groupDef\" : \"$groupDef\", \n" +
+                    " \"devUuids\" : [ $strBuilder ] \n" +
+                    "}"
+        }
 
         class InfoDTO {
             var devUuid: String? = null
@@ -245,4 +266,6 @@ data class ServerResponse(
             var msg: String? = null
         }
     }
+    
+    
 }

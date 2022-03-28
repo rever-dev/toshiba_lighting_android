@@ -2,7 +2,6 @@ package com.sttptech.toshiba_lighting.Data.Room
 
 import androidx.room.*
 import com.sttptech.toshiba_lighting.Data.Bean.CeilingLight
-import com.sttptech.toshiba_lighting.Data.Bean.Device
 import com.sttptech.toshiba_lighting.Data.Bean.Group
 import com.sttptech.toshiba_lighting.Data.Bean.Scene
 
@@ -18,16 +17,16 @@ interface DataDao {
     suspend fun insertAllCeilingLights(data: List<CeilingLight>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGroup(data: Group?)
+    fun insertGroup(data: Group)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllGroups(data: List<Group?>?)
+    fun insertAllGroups(data: List<Group?>?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertScene(data: Scene?)
+    fun insertScene(data: Scene?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllScene(data: List<Scene?>?)
+    fun insertAllScene(data: List<Scene?>?)
 
     /**複雜(?)新增所有資料的方法 */
     //    @Query("INSERT INTO "+tableName+"(name,phone,hobby,elseInfo) VALUES(:name,:phone,:hobby,:elseData)")
@@ -39,10 +38,10 @@ interface DataDao {
     fun allCeilingLights(): List<CeilingLight>?
 
     @Query("SELECT * FROM " + DataBase.GROUPS_TABLE_NAME)
-    fun allGroups(): List<Group?>?
+    fun allGroups(): List<Group>?
 
     @Query("SELECT * FROM " + DataBase.SCENE_TABLE_NAME)
-    fun allScene(): List<Scene?>?
+    fun allScene(): List<Scene>?
 
     /**撈取某個名字的相關資料 */
 
@@ -68,17 +67,17 @@ interface DataDao {
 
     /*======================================================================================= */
     /**簡單刪除資料的方法 */
-    @Delete
-    fun deleteCeilingLight(data: CeilingLight)
+    @Query("DELETE FROM " + DataBase.CEILING_LIGHT_TABLE_NAME + " WHERE uId = :uId")
+    fun deleteCeilingLightByUId(uId: String)
 
     @Delete
     fun deleteGroups(data: Group)
 
-//    @Query("DELETE FROM " + DataBase.SCENE_TABLE_NAME + " WHERE grsituationUuid = :uId")
-//    fun deleteSceneByUId(uId: String)
+    @Query("DELETE FROM " + DataBase.SCENE_TABLE_NAME + " WHERE uId = :uId")
+    fun deleteSceneByUId(uId: String)
 
-//    @Query("DELETE FROM " + DataBase.SCENE_TABLE_NAME + " WHERE grsituationSeq = :seq")
-//    fun deleteSceneBySeq(seq: Int): Int
+    @Query("DELETE FROM " + DataBase.SCENE_TABLE_NAME + " WHERE seq = :seq")
+    fun deleteSceneBySeq(seq: Int): Int
 
     @Query("DELETE FROM " + DataBase.CEILING_LIGHT_TABLE_NAME)
     fun deleteCeilingLightTable()

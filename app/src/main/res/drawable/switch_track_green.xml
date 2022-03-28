@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 高度25 -->
+    <!-- 高度24 -->
     <size android:height="24dp"/>
     <!-- 圆角弧度 15 -->
     <corners android:radius="15dp"/>
     <!-- 变化率 -->
     <gradient
-        android:endColor="@color/ios_blue"
-        android:startColor="@color/ios_blue" />
+        android:endColor="@color/ios_switch_green"
+        android:startColor="@color/ios_switch_green" />
 </shape>

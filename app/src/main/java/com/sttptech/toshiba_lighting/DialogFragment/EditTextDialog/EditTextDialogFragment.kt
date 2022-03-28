@@ -3,7 +3,9 @@ package com.sttptech.toshiba_lighting.DialogFragment.EditTextDialog
 import android.os.Bundle
 import android.view.*
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.sttptech.toshiba_lighting.DialogFragment.BaseDialogFragment
+import com.sttptech.toshiba_lighting.R
 import com.sttptech.toshiba_lighting.databinding.DialogfragEdittextBinding
 
 class EditTextDialogFragment(
@@ -17,13 +19,8 @@ class EditTextDialogFragment(
     true
 ) {
 
-    companion object {
-
-        private const val TAG = "EditTextDialog"
-    }
-
     interface OnTextInputCallback {
-        fun onTextInput(str: String?)
+        fun onTextInput(str: String)
     }
 
     var callback: OnTextInputCallback? = null
@@ -51,33 +48,27 @@ class EditTextDialogFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vb.inpDiaTvTitle.text = title
+        
         with(vb.inpDiaEditText) {
             hint = textHint
             setText(inputText)
         }
-
+        
+        setListener()
+    }
+    
+    private fun setListener() {
         vb.inpDiaTvCancel.setOnClickListener { dismiss() }
+        
         vb.inpDiaTvConfirm.setOnClickListener {
-            if (vb.inpDiaEditText.text.toString().trim().isNotEmpty()) {
-                callback!!.onTextInput(vb.inpDiaEditText.text.toString())
-                callback = null
-                dismiss()
-            } else
-                dismiss()
+            if (callback != null) {
+                val inputString = vb.inpDiaEditText.text.toString()
+                if (inputString.trim().isNotEmpty()) {
+                    callback!!.onTextInput(inputString)
+                    dismiss()
+                } else
+                    Snackbar.make(it, R.string.nameIsNotEmpty, Snackbar.LENGTH_SHORT).show()
+            }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (callback != null)
-            callback!!.onTextInput(null)
     }
 }

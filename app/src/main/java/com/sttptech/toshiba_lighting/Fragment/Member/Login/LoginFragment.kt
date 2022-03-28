@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.sttptech.toshiba_lighting.Activity.Member.MemberActivity
 import com.sttptech.toshiba_lighting.Adapter.BannerAdapter
 import com.sttptech.toshiba_lighting.Application.BaseApplication
@@ -37,7 +38,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _vb = FragmentLoginBinding.inflate(inflater, container, false)
         return vb.root
     }
@@ -79,7 +80,7 @@ class LoginFragment : Fragment() {
         super.onStart()
 
         // Password visibility
-        vm.passwordVisibility.observe(this, {
+        vm.passwordVisibility.observe(viewLifecycleOwner) {
             val eye = vb.fragLoginImgPasswordShowHide
             val pwd = vb.fragLoginEtPassword
             if (it) {
@@ -89,33 +90,35 @@ class LoginFragment : Fragment() {
                 pwd.transformationMethod = PasswordTransformationMethod.getInstance()
                 eye.setImageResource(R.drawable.ic_visibility_off_24)
             }
-        })
-
+        }
+    
         // Loading
-        vm.loadStatus.observe(this, {
+        vm.loadStatus.observe(this) {
             val loadingView = BaseApplication.loadingView
-
+    
             if (it)
                 loadingView.show(parentFragmentManager, null)
-             else
+            else
                 loadingView.dismiss()
-        })
-
+        }
+    
         // Login status
-        vm.loginStatus.observe(this, {
+        vm.loginStatus.observe(this) {
             when (it) {
                 // success -> start to MainActivity
                 1 -> {
-                    Toast.makeText(context, R.string.login_success, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context, R.string.login_success, Toast.LENGTH_SHORT).show()
+//                    Snackbar.make(requireContext(), requireView(), getString(R.string.login_success), Snackbar.LENGTH_SHORT).show()
                     (activity as MemberActivity).startMainActivity()
                 }
                 // fail -> show toast
                 2 -> {
-                    Toast.makeText(context, R.string.login_fail, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context, R.string.login_fail, Toast.LENGTH_SHORT).show()
+                    Snackbar.make(requireView(), R.string.login_fail, Snackbar.LENGTH_SHORT).show()
                     vm.loginStatus.value = 0
                 }
             }
-        })
+        }
     }
 
     override fun onDestroy() {

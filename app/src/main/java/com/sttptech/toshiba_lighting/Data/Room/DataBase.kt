@@ -21,7 +21,7 @@ abstract class DataBase : RoomDatabase() {
 
     companion object {
         private const val DB_NAME = "data_base" // 資料庫名稱
-        const val DB_VERSION = 3 // 資料庫版本
+        const val DB_VERSION = 4 // 資料庫版本
 
         const val CEILING_LIGHT_TABLE_NAME = "CEILING_LIGHT_TABLE"
         const val GROUPS_TABLE_NAME = "GROUPS_TABLE"

@@ -6,12 +6,10 @@
             <solid
                 android:color="@color/white" />
             <corners
-                android:radius="10dip" />
+                android:radius="8dp" />
             <stroke
-                android:width="4px"
+                android:width="1dp"
                 android:color="@color/edittext_bg_gray" />
         </shape>
     </item>
-
-
 </selector>

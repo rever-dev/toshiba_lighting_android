@@ -34,7 +34,7 @@ class ModeButton : FrameLayout {
         tvName = findViewById(R.id.modeBtn_tvName)
     }
 
-    fun setIcon(drawable: Drawable) {
+    fun setIcon(drawable: Drawable?) {
         icon.setImageDrawable(drawable)
     }
 

@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
-import com.sttptech.toshiba_lighting.AppUtil.KeyOfShp
+import com.sttptech.toshiba_lighting.AppUtil.AppKey
 import com.sttptech.toshiba_lighting.Fragment.BaseViewModel
 import com.sttptech.toshiba_lighting.RetrofitUtil.ServerResponse
 
@@ -42,10 +42,10 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                     loadStatus.value = false
                 }
             } else { // login success
-                context.getSharedPreferences(KeyOfShp.SHP_NAME, Context.MODE_PRIVATE).edit {
-                    putBoolean(KeyOfShp.SHP_LOGIN, true)
-                    putString(KeyOfShp.SHP_ACCOUNT, account)
-                    putString(KeyOfShp.SHP_TOKEN, response.getDatum()?.token)
+                context.getSharedPreferences(AppKey.SHP_NAME, Context.MODE_PRIVATE).edit {
+                    putBoolean(AppKey.SHP_LOGIN, true)
+                    putString(AppKey.SHP_ACCOUNT, account)
+                    putString(AppKey.SHP_TOKEN, response.getDatum()?.token)
                 }
                 mainHandler.post() {
                     loginStatus.value = 1
