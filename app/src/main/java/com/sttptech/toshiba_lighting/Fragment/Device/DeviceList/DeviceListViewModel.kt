@@ -21,24 +21,20 @@ class DeviceListViewModel(application: Application) : BaseViewModel(application)
     private val mainHandler = Handler(Looper.getMainLooper())
     private val mqtt get() = BaseApplication.mqttClient
     
-    lateinit var deviceList: MutableLiveData<List<Device>?>
-    lateinit var groupList: MutableLiveData<List<Group>?>
+    var deviceList: MutableLiveData<List<Device>?> = MutableLiveData()
+    var groupList: MutableLiveData<List<Group>?> = MutableLiveData()
     
-    lateinit var updateStatus: MutableLiveData<Device>
+    var updateStatus: MutableLiveData<Device> = MutableLiveData()
     
     init {
         Thread {
             // device
             val ceilingLight: List<CeilingLight>? = repository.localS.allCeilingLights()
-            deviceList = MutableLiveData()
             deviceList.postValue(ceilingLight)
             
             // group
             val groups: List<Group>? = repository.localS.allGroups()
-            groupList = MutableLiveData()
             groupList.postValue(groups)
-            
-            updateStatus = MutableLiveData()
         }.start()
     }
     

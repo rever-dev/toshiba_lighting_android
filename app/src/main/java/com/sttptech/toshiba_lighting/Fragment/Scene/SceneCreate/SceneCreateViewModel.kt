@@ -12,28 +12,33 @@ import com.sttptech.toshiba_lighting.Data.Bean.Scene
 import com.sttptech.toshiba_lighting.Mqtt.MqttPublish
 
 class SceneCreateViewModel(application: Application) : BaseViewModel(application) {
-    lateinit var imageUri: MutableLiveData<Uri>
     
-    lateinit var imageByte: MutableLiveData<ByteArray>
+    var imageUri: MutableLiveData<Uri> = MutableLiveData()
     
-    lateinit var selectList: MutableLiveData<MutableList<Device>>
-    lateinit var groupList: MutableLiveData<List<Group>>
-    lateinit var deviceList: MutableLiveData<List<Device>>
+    var imageByte: MutableLiveData<ByteArray> = MutableLiveData()
+    
+    var selectList: MutableLiveData<MutableList<Device>> = MutableLiveData()
+    var groupList: MutableLiveData<List<Group>> = MutableLiveData()
+    var deviceList: MutableLiveData<List<Device>> = MutableLiveData()
     
     var touchBlocker: FastTouchBlocker = FastTouchBlocker()
     
     init {
-        imageUri = MutableLiveData()
-        
-        imageByte = MutableLiveData()
-        selectList = MutableLiveData()
-        groupList = MutableLiveData()
-        deviceList = MutableLiveData()
-        
         Thread {
             deviceList.postValue(localService.allCeilingLights())
-            groupList.postValue(localService.allGroups())
             selectList.postValue(mutableListOf())
+            
+            val groups = localService.allGroups()
+            val tempGroups = groups?.toMutableList()
+            if (groups != null) {
+                for (group in groups) {
+                    if (group.devUuids != null &&
+                        group.devUuids!!.isEmpty())
+                        tempGroups!!.remove(group)
+                }
+            }
+            
+            groupList.postValue(tempGroups?.toList())
         }.start()
     }
     
@@ -54,16 +59,17 @@ class SceneCreateViewModel(application: Application) : BaseViewModel(application
     
     /** insert scene to server */
     private fun insertSceneToServer(name: String): Scene? {
-        
+    
         /** check seq code */
         var seqCode = 30
-        val sceneList = localService.allScene()?.toList()
+        var sceneList = localService.allScene()?.sortedBy { scene -> scene.seq }
         
         if (sceneList != null) {
-            sceneList.sortedBy { seqCode }
             for (scene in sceneList) {
-                if (seqCode != scene.seq) break
-                else seqCode++
+                if (seqCode != scene.seq) {
+                    break
+                } else
+                    seqCode += 1
             }
         }
         
@@ -76,25 +82,26 @@ class SceneCreateViewModel(application: Application) : BaseViewModel(application
             insertResponse.isSuccess().not() ||
             insertResponse.getDatum() == null
         ) return null
-        
-        
+    
+    
         val uUid = insertResponse.getDatum()?.grsituationUuid ?: return null
         val file = imageUri.value?.toFile() ?: return null
-        
+    
         val newScene = Scene(insertResponse.getDatum()!!.grsituationUuid!!)
-        newScene.name = name
-        newScene.seq = seqCode
+        newScene.name = insertResponse.getDatum()!!.grsituationName
+        newScene.seq = insertResponse.getDatum()!!.grsituationSeq
         newScene.def = "N"
-        newScene.order = sceneList?.size?.plus(1)
-        newScene.devUuids = kotlin.run {
-            if (selectList.value == null) return null
-            
-            val strList: MutableList<String> = mutableListOf()
-            for (scene in selectList.value!!) {
-                strList.add(scene.uId!!)
-            }
-            strList.toList()
-        }
+        newScene.order = insertResponse.getDatum()!!.grsituationOrder
+//        newScene.devUuids = kotlin.run {
+//            if (selectList.value == null) return null
+//
+//            val strList: MutableList<String> = mutableListOf()
+//            for (scene in selectList.value!!) {
+//                strList.add(scene.uId!!)
+//            }
+//            strList.toList()
+//        }
+        newScene.devUuids = insertResponse.getDatum()!!.devUuids
         
         val imageResponse = remoteService.updateSceneImage(uUid, file)
         
@@ -104,7 +111,7 @@ class SceneCreateViewModel(application: Application) : BaseViewModel(application
         ) return null
         
         newScene.image = imageByte.value
-//        newScene.imageUrl = imageResponse.getDatum().
+        newScene.imageUrl = imageResponse.getDatum()!!.grsituationImage
         
         return newScene
     }

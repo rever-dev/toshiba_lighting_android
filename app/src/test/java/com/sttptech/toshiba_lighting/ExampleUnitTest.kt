@@ -1,5 +1,6 @@
 package com.sttptech.toshiba_lighting
 
+import com.sttptech.toshiba_lighting.Data.Bean.Scene
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -32,7 +33,16 @@ class ExampleUnitTest {
     }
     
     @Test
-    fun currentTime() {
-        println(System.currentTimeMillis())
+    fun sort() {
+        val scene1 = Scene("1").apply { seq = 1 }
+        val scene2 = Scene("2").apply { seq = 2 }
+        val scene3 = Scene("3").apply { seq = 3 }
+        val scene4 = Scene("4").apply { seq = 4 }
+        val scene5 = Scene("5").apply { seq = 5 }
+        val scene6 = Scene("6").apply { seq = 6 }
+        val scene7 = Scene("7").apply { seq = 7 }
+        val list = listOf<Scene>(scene4, scene5, scene3, scene1, scene7, scene2, scene6)
+        println(list)
+        println(list.sortedBy { scene -> scene.seq })
     }
 }

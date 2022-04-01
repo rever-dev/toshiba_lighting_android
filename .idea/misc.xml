@@ -9,6 +9,7 @@
         <entry key="../../../.gradle/caches/transforms-3/2e3da6e75774bd557e7ac82186dda3b2/transformed/jetified-colorpickerview-2.2.4/res/layout/dialog_colorpicker_colorpickerview_skydoves.xml" value="0.22780797101449277" />
         <entry key="../../../.gradle/caches/transforms-3/2e3da6e75774bd557e7ac82186dda3b2/transformed/jetified-colorpickerview-2.2.4/res/layout/flag_bubble_colorpickerview_skydoves.xml" value="0.22780797101449277" />
         <entry key="../../../.gradle/caches/transforms-3/b1aa95ab26f6e1763e1b9ea3e82669e5/transformed/material-1.5.0/res/layout/design_layout_tab_text.xml" value="0.18645833333333334" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.1889564336372847" />
         <entry key="app/src/main/res/drawable-v24/dialog_bg_bottom.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable-v24/radiogroup_bg_white.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable-v24/seekbar_progress_drawable_mbr.xml" value="0.3546875" />
@@ -26,6 +27,7 @@
         <entry key="app/src/main/res/drawable/ic_lightbulb_36.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/ic_pause_24.xml" value="0.3155" />
         <entry key="app/src/main/res/drawable/ic_play_arrow_24.xml" value="0.3155" />
+        <entry key="app/src/main/res/drawable/ic_sche_24.xml" value="0.276" />
         <entry key="app/src/main/res/drawable/ic_settings_24.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/ic_settings_36.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/image_wifi_connected_60.xml" value="0.3546875" />
@@ -67,6 +69,7 @@
         <entry key="app/src/main/res/layout/fragment_scene_create.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_scene_edit.xml" value="0.1889564336372847" />
         <entry key="app/src/main/res/layout/fragment_scene_list.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_schedule_list.xml" value="0.335" />
         <entry key="app/src/main/res/layout/itemview_device_list.xml" value="0.32599334716796874" />
         <entry key="app/src/main/res/layout/itemview_devicelist.xml" value="0.67" />
         <entry key="app/src/main/res/layout/itemview_pair_device.xml" value="0.6143386897404203" />

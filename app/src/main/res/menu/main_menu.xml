@@ -6,6 +6,10 @@
         android:icon="@drawable/ic_photo_library_24"
         android:title="@string/scene" />
     <item
+        android:id="@+id/sceneScheduleFragment"
+        android:icon="@drawable/ic_sche_24"
+        android:title="@string/sceneSchedule" />
+    <item
         android:id="@+id/deviceListFragment"
         android:icon="@drawable/ic_tune_24"
         android:title="@string/device" />

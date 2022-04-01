@@ -27,11 +27,22 @@ class SceneDeviceAdapter : ListAdapter<Device, SceneDeviceAdapter.Viewholder>(Di
     
     var callback: DeviceSelectedCallback? = null
     
+    var selectList: List<Device>? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+    
     inner class Viewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cbGroup = itemView.findViewById<CheckBox>(R.id.sceneDevice_cbGroup)
         val tvName = itemView.findViewById<TextView>(R.id.sceneDevice_tvName)
         
         fun bindView(data: Device) {
+            
+            if (selectList != null)
+                cbGroup.isChecked = selectList!!.contains(data)
+            
+            
             cbGroup.text = data.group?.groupName
             tvName.text = data.name
             

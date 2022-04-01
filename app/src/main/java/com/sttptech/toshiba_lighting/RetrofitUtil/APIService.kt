@@ -131,7 +131,16 @@ interface APIService {
         fun sceneModify(
             @HeaderMap headers: Map<String?, String?>?,
             @Body responseBody: RequestBody?
-        ): Call<ResponseBody?>?
+        ): Call<ResponseBody?>
+    
+        /**
+         * 情就排序
+         * */
+        @POST("terminal/grsituation/sort")
+        fun sceneSort(
+            @HeaderMap headers: Map<String?, String?>?,
+            @Body requestBody: RequestBody?
+        ): Call<ResponseBody?>
     
         /** 獲取情境圖片 */
         @GET
@@ -143,6 +152,38 @@ interface APIService {
             @HeaderMap headers: Map<String?, String?>?,
             @Path("uUid") uUid: String?,
             @Part file: MultipartBody.Part?
+        ): Call<ResponseBody?>
+    }
+    
+    interface SceneSchedule {
+        @POST("terminal/grsituation/cycletask/weekly/add")
+        fun sceneScheduleAdd(
+            @HeaderMap header: Map<String?, String?>?,
+            @Body requestBody: RequestBody?
+        ): Call<ResponseBody?>
+        
+        @POST("terminal/grsituation/cycletask/weekly/info")
+        fun sceneScheduleInfo(
+            @HeaderMap header: Map<String?, String?>?,
+            @Body requestBody: RequestBody?
+        ): Call<ResponseBody?>
+        
+        @POST("terminal/grsituation/cycletask/weekly/modify")
+        fun sceneScheduleModify(
+            @HeaderMap header: Map<String?, String?>?,
+            @Body requestBody: RequestBody?
+        ): Call<ResponseBody?>
+        
+        @POST("terminal/grsituation/cycletask/weekly/onoff")
+        fun sceneScheduleOnOff(
+            @HeaderMap header: Map<String?, String?>?,
+            @Body requestBody: RequestBody?
+        ): Call<ResponseBody?>
+        
+        @POST("terminal/grsituation/cycletask/weekly/delete")
+        fun sceneScheduleDelete(
+            @HeaderMap header: Map<String?, String?>?,
+            @Body requestBody: RequestBody?
         ): Call<ResponseBody?>
     }
 }

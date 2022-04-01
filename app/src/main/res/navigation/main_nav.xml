@@ -72,4 +72,9 @@
             app:enterAnim="@anim/anim_fragment_in"
             app:popExitAnim="@anim/anim_fragment_out" />
     </fragment>
+    <fragment
+        android:id="@+id/sceneScheduleFragment"
+        android:name="com.sttptech.toshiba_lighting.Fragment.SceneSchedule.ScheduleList.ScheduleListFragment"
+        android:label="fragment_schedule_list"
+        tools:layout="@layout/fragment_schedule_list" />
 </navigation>

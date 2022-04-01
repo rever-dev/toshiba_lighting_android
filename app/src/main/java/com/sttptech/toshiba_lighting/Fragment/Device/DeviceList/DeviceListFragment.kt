@@ -138,9 +138,6 @@ class DeviceListFragment : Fragment() {
                 data?.toList()
             else
                 data?.filter { it.group?.groupName == selectedText }?.toList()
-
-//            Logger.d("adapter current list: " + adapter.currentList)
-//            Logger.d("filter list: $filterData")
             
             adapter.submitList(filterData)
         }

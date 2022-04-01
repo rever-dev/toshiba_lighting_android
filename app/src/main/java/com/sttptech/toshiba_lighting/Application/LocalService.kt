@@ -69,6 +69,18 @@ class LocalService(var context: Context) : RepositoryService.LocalData {
         dao.insertScene(data)
     }
     
+    override fun insertAllScene(dataList: List<Scene>) {
+        dao.insertAllScene(dataList)
+    }
+    
+    override fun getSceneBySeq(seq: Int): Scene? {
+        return dao.getSceneBySeq(seq)
+    }
+    
+    override fun getSceneByUuid(uUid: String): Scene? {
+        return dao.getSceneByUuid(uUid)
+    }
+    
     override fun deleteSceneByUuid(uUid: String) {
         dao.deleteSceneByUId(uUid)
     }

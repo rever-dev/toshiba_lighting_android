@@ -3,11 +3,14 @@ package com.sttptech.toshiba_lighting.Activity.Main
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.espressif.iot.esptouch.EsptouchTask
+import com.espressif.iot.esptouch.IEsptouchResult
 import com.espressif.iot.esptouch2.provision.EspProvisioner
 import com.espressif.iot.esptouch2.provision.EspProvisioningListener
 import com.espressif.iot.esptouch2.provision.EspProvisioningRequest
@@ -270,141 +273,140 @@ class MainActivity : AppCompatActivity(),
 //    }
 //
     
-    private var espV2Task: EspProvisioner? = null
-    
-    fun esptouchStart(ssid: ByteArray, bssid: ByteArray, pwd: ByteArray, context: Context) {
-        showLoading()
-        BaseApplication.mqttClient.mqttCallbackListener = this
-        if (espV2Task == null) {
-            Thread {
-                espV2Task = EspProvisioner(this)
-                val espReq = EspProvisioningRequest.Builder(this)
-                    .setSSID(ssid)
-                    .setBSSID(bssid)
-                    .setPassword(pwd)
-                    .setReservedData(null)
-                    .build()
-            
-                espV2Task!!.startProvisioning(espReq, object : EspProvisioningListener {
-                    override fun onStart() {
-                    
-                    }
-                
-                    override fun onResponse(result: EspProvisioningResult?) {
-                        if (result == null) return
-                    
-                        val bssid = result.bssid.uppercase().replace(":", "")
-                    
-                        val json = JsonObject()
-                        json.addProperty("config", "CONFIGURATION")
-                    
-                        try {
-                            BaseApplication.mqttClient.subscribeTopic(
-                                MqttTopic.DEVICE_CONFIG,
-                                bssid,
-                                MqttTopicTag.CONFIG
-                            )
-                        } catch (e: MqttException) {
-                            e.printStackTrace()
-                        }
-                        try {
-                            synchronized(this) { Thread.sleep(2_000) }
-                        } catch (e: InterruptedException) {
-                            e.printStackTrace()
-                        }
-                        BaseApplication.mqttClient.sendMsg(
-                            Gson().toJson(json),
-                            MqttTopic.DEVICE_CONFIG,
-                            bssid,
-                            MqttTopicTag.CONFIG
-                        )
-                    
-                    }
-                
-                    override fun onStop() {
-                    
-                    }
-                
-                    override fun onError(e: java.lang.Exception?) {
-                    
-                    }
-                })
-            
-            
-            }.start()
-        }
-    
-    }
-    
-    fun esptouchStop() {
-        if (espV2Task != null) {
-            espV2Task!!.stopProvisioning()
-            espV2Task = null
-        }
-    }
-
-//    private var espTask: EsptouchTask? = null
+//    private var espV2Task: EspProvisioner? = null
 //
 //    fun esptouchStart(ssid: ByteArray, bssid: ByteArray, pwd: ByteArray, context: Context) {
 //        showLoading()
 //        BaseApplication.mqttClient.mqttCallbackListener = this
-//        if (espTask == null) {
+//        if (espV2Task == null) {
 //            Thread {
-//                espTask = EsptouchTask(ssid, bssid, pwd, context)
-//                espTask?.setEsptouchListener { result: IEsptouchResult -> resultMqttEvent(result) }
-//                // TODO: 2022/1/13 result not used
-//                var result = espTask?.executeForResults(-1)
+//                espV2Task = EspProvisioner(this)
+//                val espReq = EspProvisioningRequest.Builder(this)
+//                    .setSSID(ssid)
+//                    .setBSSID(bssid)
+//                    .setPassword(pwd)
+//                    .setReservedData(null)
+//                    .build()
 //
-//                BaseApplication.mqttClient.mqttCallbackListener = null
-//                espTask = null
+//                espV2Task!!.startProvisioning(espReq, object : EspProvisioningListener {
+//                    override fun onStart() {
 //
-//                if (!result!![0].isSuc) {
-//                    dismissLoading()
-//                    // TODO: 2022/1/13 change to AlertDialog
-//                    runOnUiThread { Toast.makeText(this, "no search any device.", Toast.LENGTH_SHORT).show() }
-//                }
+//                    }
+//
+//                    override fun onResponse(result: EspProvisioningResult?) {
+//                        if (result == null) return
+//
+//                        val bssid = result.bssid.uppercase().replace(":", "")
+//
+//                        val json = JsonObject()
+//                        json.addProperty("config", "CONFIGURATION")
+//
+//                        try {
+//                            BaseApplication.mqttClient.subscribeTopic(
+//                                MqttTopic.DEVICE_CONFIG,
+//                                bssid,
+//                                MqttTopicTag.CONFIG
+//                            )
+//                        } catch (e: MqttException) {
+//                            e.printStackTrace()
+//                        }
+//                        try {
+//                            synchronized(this) { Thread.sleep(2_000) }
+//                        } catch (e: InterruptedException) {
+//                            e.printStackTrace()
+//                        }
+//                        BaseApplication.mqttClient.sendMsg(
+//                            Gson().toJson(json),
+//                            MqttTopic.DEVICE_CONFIG,
+//                            bssid,
+//                            MqttTopicTag.CONFIG
+//                        )
+//
+//                    }
+//
+//                    override fun onStop() {
+//
+//                    }
+//
+//                    override fun onError(e: java.lang.Exception?) {
+//
+//                    }
+//                })
+//
+//
 //            }.start()
 //        }
-//
-//        Logger.i("EspTouch Start")
 //    }
 //
 //    fun esptouchStop() {
-//        if (espTask != null && !espTask!!.isCancelled) {
-//            espTask?.interrupt()
-//            dismissLoading()
-//
-//            Logger.i("EspTouch interrupt")
+//        if (espV2Task != null) {
+//            espV2Task!!.stopProvisioning()
+//            espV2Task = null
 //        }
-//
 //    }
-//
-//    private fun resultMqttEvent(result: IEsptouchResult) {
-//
-//        val json = JsonObject()
-//        json.addProperty("config", "CONFIGURATION")
-//
-//        try {
-//            BaseApplication.mqttClient.subscribeTopic(
-//                MqttTopic.DEVICE_CONFIG,
-//                result.bssid.uppercase(),
-//                MqttTopicTag.CONFIG
-//            )
-//        } catch (e: MqttException) {
-//            e.printStackTrace()
-//        }
-//        try {
-//            synchronized(this) { Thread.sleep(2_000) }
-//        } catch (e: InterruptedException) {
-//            e.printStackTrace()
-//        }
-//        BaseApplication.mqttClient.sendMsg(
-//            Gson().toJson(json),
-//            MqttTopic.DEVICE_CONFIG,
-//            result.bssid.uppercase(),
-//            MqttTopicTag.CONFIG
-//        )
-//    }
+
+    private var espTask: EsptouchTask? = null
+
+    fun esptouchStart(ssid: ByteArray, bssid: ByteArray, pwd: ByteArray, context: Context) {
+        showLoading()
+        BaseApplication.mqttClient.mqttCallbackListener = this
+        if (espTask == null) {
+            Thread {
+                espTask = EsptouchTask(ssid, bssid, pwd, context)
+                espTask?.setEsptouchListener { result: IEsptouchResult -> resultMqttEvent(result) }
+                // TODO: 2022/1/13 result not used
+                var result = espTask?.executeForResults(-1)
+
+                BaseApplication.mqttClient.mqttCallbackListener = null
+                espTask = null
+
+                if (!result!![0].isSuc) {
+                    dismissLoading()
+                    // TODO: 2022/1/13 change to AlertDialog
+                    runOnUiThread { Toast.makeText(this, "no search any device.", Toast.LENGTH_SHORT).show() }
+                }
+            }.start()
+        }
+
+        Logger.i("EspTouch Start")
+    }
+
+    fun esptouchStop() {
+        if (espTask != null && !espTask!!.isCancelled) {
+            espTask?.interrupt()
+            dismissLoading()
+
+            Logger.i("EspTouch interrupt")
+        }
+
+    }
+
+    private fun resultMqttEvent(result: IEsptouchResult) {
+
+        val json = JsonObject()
+        json.addProperty("config", "CONFIGURATION")
+
+        try {
+            BaseApplication.mqttClient.subscribeTopic(
+                MqttTopic.DEVICE_CONFIG,
+                result.bssid.uppercase(),
+                MqttTopicTag.CONFIG
+            )
+        } catch (e: MqttException) {
+            e.printStackTrace()
+        }
+        try {
+            synchronized(this) { Thread.sleep(2_000) }
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        BaseApplication.mqttClient.sendMsg(
+            Gson().toJson(json),
+            MqttTopic.DEVICE_CONFIG,
+            result.bssid.uppercase(),
+            MqttTopicTag.CONFIG
+        )
+    }
     
     private var pairPage: PairDeviceDialogFragment? = null
     

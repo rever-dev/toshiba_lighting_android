@@ -12,6 +12,7 @@ import com.sttptech.toshiba_lighting.Application.RepositoryService.RemoteData.Mo
 import com.sttptech.toshiba_lighting.Application.RepositoryService.RemoteData.ModifyDeviceSettings
 import com.sttptech.toshiba_lighting.Application.RepositoryService.RemoteData.ModifyDeviceSettings.*
 import com.sttptech.toshiba_lighting.Data.Bean.Device
+import com.sttptech.toshiba_lighting.Data.Bean.Scene
 import com.sttptech.toshiba_lighting.RetrofitUtil.APIService
 import com.sttptech.toshiba_lighting.RetrofitUtil.InfoListRes
 import com.sttptech.toshiba_lighting.RetrofitUtil.RetrofitUtil
@@ -590,7 +591,7 @@ class RemoteService(var context: Context) : RepositoryService.RemoteData {
                 val resStr = response.body()!!.string()
                 
                 Logger.i("update image response: \n$resStr")
-                
+    
                 Gson().fromJson(resStr, ServerResponse::class.java)
             } else {
                 Logger.e(
@@ -607,6 +608,138 @@ class RemoteService(var context: Context) : RepositoryService.RemoteData {
             e.printStackTrace()
             null
         }
+    
+    }
+    
+    override fun updateScene(
+        sceneUid: String,
+        addDevs: List<String>?,
+        removeDevs: List<String>?,
+        name: String?
+    ): ServerResponse? {
         
+        val jsBody = JsonObject().apply {
+            add("parms", JsonObject().apply {
+                
+                // add dev
+                if (addDevs != null) {
+                    add("addDevUuids", JsonArray().apply {
+                        for (devUuid in addDevs) {
+                            add(devUuid)
+                        }
+                    })
+                }
+                
+                // remove dev
+                if (removeDevs != null) {
+                    add("removeDevUuids", JsonArray().apply {
+                        for (devUuid in removeDevs) {
+                            add(devUuid)
+                        }
+                    })
+                }
+                
+                // name
+                if (name != null)
+                    addProperty("grsituationName", name)
+                
+                // uid
+                addProperty("grsituationUuid", sceneUid)
+            })
+        }
+        
+        Logger.i("update scene request: $jsBody")
+        
+        val call = retrofit
+            .create(APIService.Scene::class.java)
+            .sceneModify(RetrofitUtil.getHeader(context), RetrofitUtil.buildReqBody(jsBody))
+        
+        return try {
+            val response = call.execute()
+            
+            if (response.isSuccessful) {
+                val resStr = response.body()!!.string()
+                
+                Logger.i("update scene response: $resStr")
+                
+                return Gson().fromJson(resStr, ServerResponse::class.java)
+            }
+            
+            null
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    
+    override fun sortScene(sceneList: List<Scene>): ServerResponse? {
+        
+        val jsBody = JsonObject().apply {
+            add("parms", JsonObject().apply {
+                add("grsituationUuids", JsonArray().apply {
+                    for (scene in sceneList) {
+                        add(scene.uId)
+                    }
+                })
+            })
+        }
+        
+        Logger.i("sort scene request: $jsBody")
+        
+        val call = retrofit
+            .create(APIService.Scene::class.java)
+            .sceneSort(RetrofitUtil.getHeader(context), RetrofitUtil.buildReqBody(jsBody))
+        
+        return try {
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val resStr = response.body()!!.string()
+                
+                Logger.i("sort scene response: $resStr")
+                
+                return Gson().fromJson(resStr, ServerResponse::class.java)
+            }
+            null
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    
+    override fun getSchedule(): ServerResponse? {
+        
+        val call = retrofit
+            .create(APIService.SceneSchedule::class.java)
+            .sceneScheduleInfo(
+                RetrofitUtil.getHeader(context),
+                RetrofitUtil.buildReqBody(JsonObject())
+            )
+        
+        Logger.i("schedule list request start")
+        
+        return try {
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val resStr = response.body()!!.string()
+                
+                Logger.i("schedule list response: $resStr")
+                
+                return Gson().fromJson(resStr, ServerResponse::class.java)
+            }
+            
+            null
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
     }
 }

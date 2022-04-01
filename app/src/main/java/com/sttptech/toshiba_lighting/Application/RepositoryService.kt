@@ -27,55 +27,90 @@ interface RepositoryService {
         fun deleteCeilingLight(uId: String)
         
         fun insertGroup(data: Group)
-        
+    
         fun allCeilingLights(): List<CeilingLight>?
-        
+    
         fun allGroups(): List<Group>?
-        
+    
         fun allScene(): List<Scene>?
-        
+    
         fun getCeilingLightById(uUid: String): CeilingLight?
-        
+    
         fun insertScene(data: Scene)
+    
+        fun insertAllScene(dataList: List<Scene>)
+    
+        fun getSceneBySeq(seq: Int): Scene?
         
+        fun getSceneByUuid(uUid: String): Scene?
+    
         fun deleteSceneByUuid(uUid: String)
-        
+    
     }
     
     interface RemoteData {
-        
+    
+        /* member */
         fun memberLogin(account: String, password: String): ServerResponse?
-        
+    
+        /* info list */
         fun getInfoList(): InfoListRes?
-        
+    
+    
+        /* device */
         fun devSignup(mac: String, group: String, name: String, model: String): ServerResponse?
-        
+    
         fun modifyDeviceName(uUid: String, newName: String): Boolean
     
         enum class ModifyDeviceGroup {
             ADD_DEVICE, REMOVE_DEVICE
         }
-        
-        fun modifyDeviceGroup(devUuid: String, groupUuid: String, action: ModifyDeviceGroup): ServerResponse?
-        
+    
+        fun modifyDeviceGroup(
+            devUuid: String,
+            groupUuid: String,
+            action: ModifyDeviceGroup
+        ): ServerResponse?
+    
         enum class ModifyDeviceSettings {
             Wakeup, DailyOn, DailyOff
         }
-        
-        fun modifyDeviceSetting(devUuid: String, action: ModifyDeviceSettings, time: String, status: String): ServerResponse?
-        
-        fun createGroup(devUuid: String, groupName: String): ServerResponse?
-        
+    
+        fun modifyDeviceSetting(
+            devUuid: String,
+            action: ModifyDeviceSettings,
+            time: String,
+            status: String
+        ): ServerResponse?
+    
         fun modifyCustomModeName(modeNum: Int, name: String, devUuid: String): Boolean
-        
+    
         fun deleteDevice(devUuid: String): ServerResponse?
         
+        
+        /* group */
+        fun createGroup(devUuid: String, groupName: String): ServerResponse?
+        
+    
+        /* scene */
         fun getSceneImage(imageUrl: String): ByteArray?
-        
+    
         fun insertScene(seqCode: Int, name: String, devList: List<Device>): ServerResponse?
-        
+    
         fun deleteScene(uUid: String): ServerResponse?
-        
+    
         fun updateSceneImage(uUid: String, img: File): ServerResponse?
+    
+        fun updateScene(
+            sceneUid: String,
+            addDevs: List<String>?,
+            removeDevs: List<String>?,
+            name: String?
+        ): ServerResponse?
+    
+        fun sortScene(sceneList: List<Scene>): ServerResponse?
+        
+        /* schedule */
+        fun getSchedule(): ServerResponse?
     }
 }

@@ -11,9 +11,11 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.orhanobut.logger.Logger
 import com.sttptech.toshiba_lighting.Data.Bean.Scene
 import com.sttptech.toshiba_lighting.R
 import dev.weiqi.resof.colorIntOf
+import dev.weiqi.resof.drawableOf
 
 class SceneSelectAdapter : ListAdapter<Scene, SceneSelectAdapter.ViewHolder>(DiffCallback()) {
     
@@ -31,12 +33,18 @@ class SceneSelectAdapter : ListAdapter<Scene, SceneSelectAdapter.ViewHolder>(Dif
             if (data.image != null) {
                 val bitmap = BitmapFactory.decodeByteArray(data.image, 0, data.image!!.size)
                 image.setImageBitmap(bitmap)
-            }
+            } else
+                image.setImageDrawable(drawableOf(R.drawable.toshiba))
+            
             
             cardView.animation = AnimationUtils.loadAnimation(itemView.context, R.anim.shake)
             
             tvName.text = data.name
             itemView.setOnClickListener { itemSelector.onItemSelect(this, data) }
+        }
+        
+        fun unbind() {
+            image.setImageBitmap(null)
         }
         
     }
@@ -50,6 +58,10 @@ class SceneSelectAdapter : ListAdapter<Scene, SceneSelectAdapter.ViewHolder>(Dif
     
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindView(currentList[position])
+    }
+    
+    override fun onViewRecycled(holder: ViewHolder) {
+        holder.unbind()
     }
     
     fun getSelectScene() = itemSelector.currentScene
@@ -77,6 +89,8 @@ class SceneSelectAdapter : ListAdapter<Scene, SceneSelectAdapter.ViewHolder>(Dif
             holder.cardView.setCardBackgroundColor(colorIntOf(R.color.ios_blue))
             currentViewHolder = holder
             currentScene = scene
+            
+            Logger.i("item selector _ current selected scene: \n${scene.name}")
         }
     }
 }

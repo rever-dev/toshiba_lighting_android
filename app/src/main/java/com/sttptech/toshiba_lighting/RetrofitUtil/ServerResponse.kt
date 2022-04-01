@@ -2,7 +2,6 @@ package com.sttptech.toshiba_lighting.RetrofitUtil
 
 import com.google.gson.Gson
 import com.sttptech.toshiba_lighting.Data.Bean.Group
-import java.lang.StringBuilder
 
 data class ServerResponse(
     private val code: Int,
@@ -76,6 +75,7 @@ data class ServerResponse(
         var ownGrsituations: List<OwnGrsituationsDTO>? = null
         var info: InfoDTO? = null
         var infoD: InfoDDTO? = null
+        var infos: List<InfosDTO>? = null
         var group: Group? = null
         var userInfo: UserInfoDTO? = null
         var token: String? = null
@@ -94,6 +94,7 @@ data class ServerResponse(
         var cloneGroups: List<String>? = null
         var cloneGrsituations: List<String>? = null
         var grsituationImage: String? = null
+        var grsituationOrder: Int? = null
         
         fun getGroupData(): String? {
             
@@ -168,6 +169,24 @@ data class ServerResponse(
                 var devLoc: String? = null
                 var devIconB64: String? = null
                 var devName: String? = null
+            }
+        }
+    
+        class InfosDTO {
+            var taskId: String? = null
+            var taskCode: String? = null
+            var taskSeq = 0
+            var cycleTaskType: String? = null
+            var cycleTaskMode: String? = null
+            var payload: List<PayloadDTO>? = null
+            var statusDb: String? = null
+        
+            class PayloadDTO {
+                var cycleTaskId: String? = null
+                var dayOfWeek = 0
+                var minuteOfDay = 0
+                var act: String? = null
+                var grsituationUuid: String? = null
             }
         }
 
@@ -248,10 +267,11 @@ data class ServerResponse(
         class OwnGrsituationsDTO {
             var grsituationUuid: String? = null
             var grsituationName: String? = null
-            var grsituationSeq = 0
+            var grsituationSeq: Int? = null
             var grsituationDef: String? = null
             var devUuids: List<String>? = null
             var groupUuids: List<String>? = null
+            var grsituationOrder: Int? = null
         }
     }
 

@@ -92,11 +92,21 @@
     <string name="takeThePicture">拍一張照片</string>
     <string name="selectThePicture">選擇一張照片</string>
     <string name="pleaseEnterSceneName">請輸入情境名稱</string>
+    <string name="pleaseSelectDevice">請選擇至少一個燈</string>
     <string name="sceneInsertSuccess">情境新增成功</string>
     <string name="sceneInsertFail">情境新增失敗</string>
+    <string name="sceneEditSuccess">情境編輯成功</string>
+    <string name="sceneEditFail">情境編輯失敗</string>
     <string name="mustSelectAScene">請選擇一個情境</string>
     <string name="sceneDeleteSuccess">情境刪除成功</string>
     <string name="sceneDeleteFail">情境刪除失敗</string>
+    <string name="sceneSortSuccess">已儲存您的情境順序</string>
+    <string name="sceneSortFail">情境順序儲存失敗</string>
+
+    <!--  scene schedule  -->
+    <string name="sceneSchedule">情境排程</string>
+
+
 
     <!--Mode-->
     <string name="mode01">美肌</string>
@@ -134,6 +144,10 @@
     <string name="hours">時</string>
     <string name="minutes">分</string>
     <string name="seconds">秒</string>
+
+    <string-array name="spinnerArray">
+        <item>全部</item>
+    </string-array>
 
 
 </resources>
