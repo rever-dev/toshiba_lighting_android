@@ -109,8 +109,30 @@ interface RepositoryService {
         ): ServerResponse?
     
         fun sortScene(sceneList: List<Scene>): ServerResponse?
-        
+    
         /* schedule */
         fun getSchedule(): ServerResponse?
+    
+        fun scheduleOnOff(taskId: String, onOff: Boolean): ServerResponse?
+    
+        fun addSchedule(sceneUuid: String, weekList: List<Int>, minOfDay: Int): ServerResponse?
+    
+        fun modifySchedule(
+            scheUuid: String,
+            sceneUuid: String,
+            weekList: List<Int>,
+            minOfDay: Int
+        ): ServerResponse?
+    
+        fun deleteSchedule(taskId: String): ServerResponse?
+    
+        /* Share */
+        fun inviteMember(account: String): ServerResponse?
+        
+        fun bindShare(verifyCode: String): ServerResponse?
+        
+        fun unbindShare(): ServerResponse?
+        
+        fun verifyCode(vCode: String): ServerResponse?
     }
 }

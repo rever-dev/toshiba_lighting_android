@@ -39,7 +39,6 @@ class DeviceListViewModel(application: Application) : BaseViewModel(application)
     }
     
     fun refreshData() {
-        Thread {
             // device
             val ceilingLight: List<CeilingLight>? = repository.localS.allCeilingLights()
             deviceList.postValue(ceilingLight)
@@ -47,7 +46,6 @@ class DeviceListViewModel(application: Application) : BaseViewModel(application)
             // group
             val groups: List<Group>? = repository.localS.allGroups()
             groupList.postValue(groups)
-        }.start()
     }
     
     fun getStatus() {

@@ -1,6 +1,5 @@
 package com.sttptech.toshiba_lighting.Adapter
 
-import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View

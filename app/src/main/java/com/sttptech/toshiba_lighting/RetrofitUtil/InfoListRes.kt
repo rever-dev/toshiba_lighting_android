@@ -17,7 +17,9 @@ data class InfoListRes(
         val ownGrsituations: List<OwnGrsituation>,
         val owns: List<Own>,
         val shareGroups: List<Any>,
-        val shares: List<Any>
+        val shares: List<Any>,
+        val share: Boolean,
+        val shareMail: String
     ) {
         data class OwnGroup(
             val devUuids: List<String>,

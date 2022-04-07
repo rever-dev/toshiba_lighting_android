@@ -9,7 +9,7 @@ data class SceneSchedule(
     var statusDB: String?,
     var payload: List<PayloadDTO>?,
     var sceneName: String?
-) {
+) : Comparable<SceneSchedule> {
     
     class PayloadDTO(
         var cycleTaskId: String?,
@@ -18,4 +18,8 @@ data class SceneSchedule(
         var act: String?,
         var grsituationUuid: String?
     )
+    
+    override fun compareTo(other: SceneSchedule): Int {
+        return (payload!![0].minuteOfDay!!).compareTo(other.payload!![0].minuteOfDay!!)
+    }
 }

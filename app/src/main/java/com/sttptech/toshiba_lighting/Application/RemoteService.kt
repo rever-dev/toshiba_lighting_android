@@ -727,12 +727,308 @@ class RemoteService(var context: Context) : RepositoryService.RemoteData {
             val response = call.execute()
             if (response.isSuccessful) {
                 val resStr = response.body()!!.string()
-                
+        
                 Logger.i("schedule list response: $resStr")
+        
+                return Gson().fromJson(resStr, ServerResponse::class.java)
+            }
+    
+            null
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    
+    override fun scheduleOnOff(taskId: String, onOff: Boolean): ServerResponse? {
+        
+        val jsBody = JsonObject().apply {
+            add("parms", JsonObject().apply {
+                addProperty("onoff", if (onOff) "Y" else "N")
+                addProperty("taskId", taskId)
+            })
+        }
+        
+        val call = retrofit
+            .create(APIService.SceneSchedule::class.java)
+            .sceneScheduleOnOff(RetrofitUtil.getHeader(context), RetrofitUtil.buildReqBody(jsBody))
+        
+        Logger.i("schedule on/off request: $jsBody")
+        
+        return try {
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val resStr = response.body()!!.string()
+                
+                Logger.i("schedule on/off response: $resStr")
                 
                 return Gson().fromJson(resStr, ServerResponse::class.java)
             }
             
+            null
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    
+    override fun addSchedule(
+        sceneUuid: String,
+        weekList: List<Int>,
+        minOfDay: Int
+    ): ServerResponse? {
+        
+        val jsBody = JsonObject().apply {
+            add("parms", JsonObject().apply {
+                addProperty("taskSeq", 0)
+                addProperty("status", "Y")
+                add("addPayload", JsonArray().apply {
+                    for (week in weekList) {
+                        add(JsonObject().apply {
+                            addProperty("act", "ON")
+                            addProperty("dayOfWeek", week)
+                            addProperty("grsituationUuid", sceneUuid)
+                            addProperty("minuteOfDay", minOfDay)
+                        })
+                    }
+                })
+            })
+        }
+        
+        Logger.i("add schedule request: $jsBody")
+        
+        val call = retrofit
+            .create(APIService.SceneSchedule::class.java)
+            .sceneScheduleAdd(RetrofitUtil.getHeader(context), RetrofitUtil.buildReqBody(jsBody))
+        
+        return try {
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val resStr = response.body()!!.string()
+                
+                Logger.i("add schedule response: $resStr")
+                
+                return Gson().fromJson(resStr, ServerResponse::class.java)
+            }
+            
+            null
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    
+    override fun modifySchedule(
+        scheUuid: String,
+        sceneUuid: String,
+        weekList: List<Int>,
+        minOfDay: Int
+    ): ServerResponse? {
+        
+        val jsBody = JsonObject().apply {
+            add("parms", JsonObject().apply {
+                addProperty("taskId", scheUuid)
+                addProperty("taskSeq", 0)
+                addProperty("status", "Y")
+                add("modPayload", JsonArray().apply {
+                    for (week in weekList) {
+                        add(JsonObject().apply {
+                            addProperty("act", "ON")
+                            addProperty("dayOfWeek", week)
+                            addProperty("grsituationUuid", sceneUuid)
+                            addProperty("minuteOfDay", minOfDay)
+                        })
+                    }
+                })
+            })
+        }
+        
+        Logger.i("modify schedule request: $jsBody")
+        
+        val call = retrofit
+            .create(APIService.SceneSchedule::class.java)
+            .sceneScheduleModify(RetrofitUtil.getHeader(context), RetrofitUtil.buildReqBody(jsBody))
+        
+        return try {
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val resStr = response.body()!!.string()
+                
+                Logger.i("modify schedule response: $resStr")
+                
+                return Gson().fromJson(resStr, ServerResponse::class.java)
+            }
+            
+            null
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    
+    override fun deleteSchedule(taskId: String): ServerResponse? {
+        
+        val jsBody = JsonObject().apply {
+            add("parms", JsonObject().apply {
+                addProperty("taskId", taskId)
+            })
+        }
+        
+        val call = retrofit
+            .create(APIService.SceneSchedule::class.java)
+            .sceneScheduleDelete(RetrofitUtil.getHeader(context), RetrofitUtil.buildReqBody(jsBody))
+        
+        Logger.i("schedule delete request: $jsBody")
+        
+        return try {
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val resStr = response.body()!!.string()
+                
+                Logger.i("schedule delete response: $resStr")
+                
+                return Gson().fromJson(resStr, ServerResponse::class.java)
+            }
+            
+            null
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    
+    /* Share */
+    
+    override fun inviteMember(account: String): ServerResponse? {
+        
+        val jsBody = JsonObject().apply {
+            add("parms", JsonObject().apply {
+                addProperty("email", account)
+            })
+        }
+        
+        Logger.i("invite member request: \n$jsBody")
+        
+        val call = retrofit.create(APIService.Share::class.java)
+            .inviteMember(RetrofitUtil.getHeader(context), RetrofitUtil.buildReqBody(jsBody))
+        
+        return try {
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val resStr = response.body()!!.string()
+                
+                Logger.i("invite member response: $resStr")
+                
+                return Gson().fromJson(resStr, ServerResponse::class.java)
+            }
+            
+            null
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    
+    override fun bindShare(verifyCode: String): ServerResponse? {
+        val jsBody = JsonObject().apply {
+            add("parms", JsonObject().apply {
+                addProperty("verificationCode", verifyCode)
+            })
+        }
+    
+        Logger.i("bind share request: \n$jsBody")
+    
+        val call = retrofit.create(APIService.Share::class.java)
+            .bindShare(RetrofitUtil.getHeader(context), RetrofitUtil.buildReqBody(jsBody))
+    
+        return try {
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val resStr = response.body()!!.string()
+            
+                Logger.i("bind share response: $resStr")
+            
+                return Gson().fromJson(resStr, ServerResponse::class.java)
+            }
+        
+            null
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    
+    override fun unbindShare(): ServerResponse? {
+        val jsBody = JsonObject()
+    
+        Logger.i("unbind share request: \n$jsBody")
+    
+        val call = retrofit.create(APIService.Share::class.java)
+            .unbindShare(RetrofitUtil.getHeader(context), RetrofitUtil.buildReqBody(jsBody))
+    
+        return try {
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val resStr = response.body()!!.string()
+            
+                Logger.i("unbind share response: $resStr")
+            
+                return Gson().fromJson(resStr, ServerResponse::class.java)
+            }
+        
+            null
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
+    }
+    
+    override fun verifyCode(vCode: String): ServerResponse? {
+        val jsBody = JsonObject().apply {
+            add("parms", JsonObject().apply {
+                addProperty("verificationCode", vCode)
+            })
+        }
+    
+        Logger.i("verify code request: \n$jsBody")
+    
+        val call = retrofit.create(APIService.Share::class.java)
+            .bindShare(RetrofitUtil.getHeader(context), RetrofitUtil.buildReqBody(jsBody))
+    
+        return try {
+            val response = call.execute()
+            if (response.isSuccessful) {
+                val resStr = response.body()!!.string()
+            
+                Logger.i("verify code response: $resStr")
+            
+                return Gson().fromJson(resStr, ServerResponse::class.java)
+            }
+        
             null
         } catch (e: IOException) {
             e.printStackTrace()

@@ -85,7 +85,7 @@ class SceneCreateFragment : Fragment(), View.OnClickListener {
     }
     
     private lateinit var vb: FragmentSceneCreateBinding
-    private var devAdapter: SceneDeviceAdapter = SceneDeviceAdapter()
+    private var devAdapter: SceneDeviceAdapter = SceneDeviceAdapter(SceneDeviceAdapter.Action.CREATE)
     
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

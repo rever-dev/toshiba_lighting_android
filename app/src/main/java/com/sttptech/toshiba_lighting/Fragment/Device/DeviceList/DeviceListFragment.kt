@@ -47,7 +47,7 @@ class DeviceListFragment : Fragment() {
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+    
         /** adapter item callback */
         adapter.itemActionListener = object : ItemActionListener {
             override fun onItemClick(dev: Device) {
@@ -71,11 +71,11 @@ class DeviceListFragment : Fragment() {
         }
         
         /** adapter divider */
-        vb.devListRecyclerView.addItemDecoration(
-            DividerItemDecorator(
-                drawableOf(R.drawable.divider_device_list)
-            )
-        )
+//        vb.devListRecyclerView.addItemDecoration(
+//            DividerItemDecorator(
+//                drawableOf(R.drawable.divider_device_list)
+//            )
+//        )
         
         observerVM()
         setListener()
@@ -83,7 +83,10 @@ class DeviceListFragment : Fragment() {
     
     override fun onResume() {
         super.onResume()
-        vm.getStatus()
+        Thread {
+            vm.refreshData()
+            vm.getStatus()
+        }.start()
     }
     
     override fun onStop() {
@@ -174,6 +177,8 @@ class DeviceListFragment : Fragment() {
     }
     
     fun refreshList() {
-        vm.refreshData()
+        Thread {
+            vm.refreshData()
+        }.start()
     }
 }

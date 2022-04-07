@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
@@ -15,10 +16,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
-import com.skydoves.colorpickerview.ColorEnvelope
+import com.skydoves.colorpickerview.ColorPickerView
 import com.skydoves.colorpickerview.flag.BubbleFlag
 import com.skydoves.colorpickerview.flag.FlagMode
-import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import com.sttptech.toshiba_lighting.AppUtil.AppKey
 import com.sttptech.toshiba_lighting.CustomView.SeekBarIndicator
 import com.sttptech.toshiba_lighting.DialogFragment.EditTextDialog.EditTextDialogFragment
@@ -100,7 +100,7 @@ class DeviceControlFragment : Fragment(), View.OnClickListener {
             vm.initDeviceData(arguments?.getString(AppKey.DEVICE_UID, ""))
             requireActivity().runOnUiThread() {
                 vm.listenTopic()
-                dataBindView()
+                observerVM()
                 vm.getStatus()
             }
         }.start()
@@ -362,6 +362,7 @@ class DeviceControlFragment : Fragment(), View.OnClickListener {
         }
     }
     
+    @SuppressLint("ClickableViewAccessibility")
     private fun setViewListener() {
         
         /** back */
@@ -407,17 +408,47 @@ class DeviceControlFragment : Fragment(), View.OnClickListener {
         vb.devConSbNBr.setOnSeekBarChangeListener(sbl)
         vb.devConSbRGBBr.setOnSeekBarChangeListener(sbl)
         
+        val scrollTouchListener = View.OnTouchListener { v, event ->
+            
+            return@OnTouchListener false
+        }
+        
         /** color picker */
-        vb.devConColorPickerView.setColorListener(object : ColorEnvelopeListener {
-            override fun onColorSelected(envelope: ColorEnvelope?, fromUser: Boolean) {
-                if (vm.switchStatus.value!! && fromUser) {
-                    vm.rgbChange(
-                        ceil(vm.rgbBr.value!!.toDouble()).toInt(),
-                        getColorPickerRGB(envelope!!.argb)
-                    )
+        vb.devConColorPickerView.setOnTouchListener { view, motionEvent ->
+            
+            when (motionEvent.action) {
+                
+                MotionEvent.ACTION_DOWN -> {
+                    vb.devConMainScroll.setOnTouchListener(scrollTouchListener)
+                    return@setOnTouchListener  true
+                }
+                
+                MotionEvent.ACTION_UP -> {
+                    val br = vm.rgbBr.value!!.toDouble().toInt()
+                    val rgb = getColorPickerRGB((view as ColorPickerView).colorEnvelope.argb)
+                    vm.rgbChange(br, rgb)
+                    
+                    vb.devConMainScroll.setOnTouchListener(null)
+                    
+                    return@setOnTouchListener false
                 }
             }
-        })
+            
+            
+            return@setOnTouchListener false
+        }
+
+
+//        vb.devConColorPickerView.setColorListener(object : ColorEnvelopeListener {
+//            override fun onColorSelected(envelope: ColorEnvelope?, fromUser: Boolean) {
+////                if (vm.switchStatus.value!! && fromUser) {
+////                    vm.rgbChange(
+////                        ceil(vm.rgbBr.value!!.toDouble()).toInt(),
+////                        getColorPickerRGB(envelope!!.argb)
+////                    )
+////                }
+//            }
+//        })
         
         /** tab view */
         vb.devConTabView.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -668,7 +699,7 @@ class DeviceControlFragment : Fragment(), View.OnClickListener {
         }
     }
     
-    private fun dataBindView() {
+    private fun observerVM() {
         /** text view name */
         vm.devName.observe(viewLifecycleOwner) { vb.devConTvName.text = it }
         vm.devCusMode1.observe(viewLifecycleOwner) { vb.devConCusModeBtn61.tvName.text = it }
@@ -735,14 +766,14 @@ class DeviceControlFragment : Fragment(), View.OnClickListener {
                     }
                 }
             }
-            
+    
             if (it != 10)
                 vb.devConConslayPlayPause.visibility = View.INVISIBLE
-            
-            if (it == 12 && vm.isSubscribe.value!!)
-                vm.unListenTopic()
-            else if (vm.isSubscribe.value!!.not())
-                vm.listenTopic()
+
+//            if (it == 12 && vm.isSubscribe.value!!)
+//                vm.unListenTopic()
+//            else if (vm.isSubscribe.value!!.not())
+//                vm.listenTopic()
             
         }
         
@@ -836,7 +867,7 @@ class DeviceControlFragment : Fragment(), View.OnClickListener {
         vb.devConConslayRGBBtn.visibility = View.VISIBLE
     }
     
-    fun colorMode() {
+    private fun colorMode() {
         vb.devConLinlayNightMode.visibility = View.VISIBLE
         vb.devConSbNBr.progressTintList =
             ColorStateList.valueOf(resources.getColor(R.color.seekBar_mode, null))
@@ -861,7 +892,7 @@ class DeviceControlFragment : Fragment(), View.OnClickListener {
         vb.devConBtnBAdd.visibility = View.INVISIBLE
     }
     
-    fun builtinMode() {
+    private fun builtinMode() {
         vb.devConLinlayNightMode.visibility = View.VISIBLE
         vb.devConSbNBr.progressTintList =
             ColorStateList.valueOf(resources.getColor(R.color.seekBar_mode, null))

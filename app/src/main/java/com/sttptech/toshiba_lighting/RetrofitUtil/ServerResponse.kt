@@ -95,11 +95,27 @@ data class ServerResponse(
         var cloneGrsituations: List<String>? = null
         var grsituationImage: String? = null
         var grsituationOrder: Int? = null
-        
+        var cycleTaskMode: String? = null
+        var cycleTaskType: String? = null
+        var payload: List<Payload>? = null
+        var statusDb: String? = null
+        var taskCode: String? = null
+        var taskId: String? = null
+        var taskSeq: Int? = null
+    
+        class Payload(
+            var act: String?,
+            var cycleTaskId: String?,
+            var dayOfWeek: Int?,
+            var grsituationUuid: String?,
+            var minuteOfDay: Int?
+        )
+    
+    
         fun getGroupData(): String? {
-            
+        
             val strBuilder = StringBuilder()
-            
+        
             for (i in 0 until devUuids?.size!!) {
                 if ((i + 1) == devUuids?.size)
                     strBuilder.append("\"${devUuids!![i]}\"")

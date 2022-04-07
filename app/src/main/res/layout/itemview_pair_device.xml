@@ -58,7 +58,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline15"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/model_led_tw_rgb_80" />
+            app:srcCompat="@drawable/toshiba_ceiling_light_outline" />
 
         <CheckBox
             android:id="@+id/itemPairDev_cb"

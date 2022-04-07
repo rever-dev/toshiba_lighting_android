@@ -16,7 +16,12 @@ import com.sttptech.toshiba_lighting.Data.Bean.Device
 import com.sttptech.toshiba_lighting.R
 import dev.weiqi.resof.stringOf
 
-class SceneDeviceAdapter : ListAdapter<Device, SceneDeviceAdapter.Viewholder>(DiffCallback()) {
+class SceneDeviceAdapter(val action: Action) :
+    ListAdapter<Device, SceneDeviceAdapter.Viewholder>(DiffCallback()) {
+    
+    enum class Action {
+        CREATE, EDIT
+    }
     
     interface DeviceSelectedCallback {
         
@@ -54,14 +59,25 @@ class SceneDeviceAdapter : ListAdapter<Device, SceneDeviceAdapter.Viewholder>(Di
             }
             
             itemView.setOnClickListener {
-                Navigation.findNavController(itemView)
-                    .navigate(
-                        R.id.action_sceneCreateFragment_to_deviceControlFragment,
-                        bundleOf(
-                            Pair(AppKey.DEVICE_UID, data.uId),
-                            Pair(AppKey.FROM_PAGE_NAME, stringOf(R.string.createScene))
+                if (action == Action.CREATE) {
+                    Navigation.findNavController(itemView)
+                        .navigate(
+                            R.id.action_sceneCreateFragment_to_deviceControlFragment,
+                            bundleOf(
+                                Pair(AppKey.DEVICE_UID, data.uId),
+                                Pair(AppKey.FROM_PAGE_NAME, stringOf(R.string.createScene))
+                            )
                         )
-                    )
+                } else {
+                    Navigation.findNavController(itemView)
+                        .navigate(
+                            R.id.action_sceneEditFragment_to_deviceControlFragment,
+                            bundleOf(
+                                Pair(AppKey.DEVICE_UID, data.uId),
+                                Pair(AppKey.FROM_PAGE_NAME, stringOf(R.string.editScene))
+                            )
+                        )
+                }
             }
         }
     }

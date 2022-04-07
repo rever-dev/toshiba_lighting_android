@@ -103,6 +103,8 @@ class SceneListFragment : Fragment(), View.OnClickListener {
         super.onResume()
         if (vm.mode.value != false)
             vm.mode.value = false
+        
+        vm.refresh()
     }
     
     private fun observerVM() {

@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.github.angads25.toggle.interfaces.OnToggledListener
 import com.github.angads25.toggle.model.ToggleableView
 import com.google.android.material.snackbar.Snackbar
@@ -32,6 +33,10 @@ class DeviceSettingsFragment : Fragment(),
     View.OnClickListener,
     CompoundButton.OnCheckedChangeListener,
     OnToggledListener {
+    
+    companion object {
+        const val DEV_DELETE = "DEV_DELETE"
+    }
     
     private lateinit var vm: DeviceSettingsViewModel
     
@@ -286,9 +291,12 @@ class DeviceSettingsFragment : Fragment(),
                                 with(this@DeviceSettingsFragment) {
                                     requireActivity().runOnUiThread {
                                         if (result) {
-                                            showSnackBarSchedule(getString(R.string.deleteDevSuccess), result)
+                                            showSnackBarSchedule(
+                                                getString(R.string.deleteDevSuccess),
+                                                result
+                                            )
                                             dialog.dismiss()
-                                            Navigation.findNavController(v).popBackStack(R.id.deviceListFragment, false)
+                                            findNavController().popBackStack(R.id.deviceListFragment, false)
                                         } else {
                                             showSnackBarSchedule(getString(R.string.deleteDevFail), result)
                                         }

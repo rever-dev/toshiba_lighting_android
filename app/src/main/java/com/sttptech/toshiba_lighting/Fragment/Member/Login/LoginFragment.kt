@@ -109,7 +109,7 @@ class LoginFragment : Fragment() {
                 1 -> {
 //                    Toast.makeText(context, R.string.login_success, Toast.LENGTH_SHORT).show()
 //                    Snackbar.make(requireContext(), requireView(), getString(R.string.login_success), Snackbar.LENGTH_SHORT).show()
-                    (activity as MemberActivity).startMainActivity()
+                    (activity as MemberActivity).startLaunchActivity()
                 }
                 // fail -> show toast
                 2 -> {

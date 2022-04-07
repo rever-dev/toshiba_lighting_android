@@ -92,6 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/container_bg_ios"
+                android:backgroundTint="@color/basic_bg_gray"
                 tools:listitem="@layout/itemview_device_list" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

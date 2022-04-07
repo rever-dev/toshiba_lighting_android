@@ -27,6 +27,7 @@
         <entry key="app/src/main/res/drawable/ic_lightbulb_36.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/ic_pause_24.xml" value="0.3155" />
         <entry key="app/src/main/res/drawable/ic_play_arrow_24.xml" value="0.3155" />
+        <entry key="app/src/main/res/drawable/ic_play_arrow_36.xml" value="0.3395" />
         <entry key="app/src/main/res/drawable/ic_sche_24.xml" value="0.276" />
         <entry key="app/src/main/res/drawable/ic_settings_24.xml" value="0.3546875" />
         <entry key="app/src/main/res/drawable/ic_settings_36.xml" value="0.3546875" />
@@ -46,6 +47,7 @@
         <entry key="app/src/main/res/drawable/switch_track_green.xml" value="0.315" />
         <entry key="app/src/main/res/drawable/tablayout_indicator.xml" value="0.315" />
         <entry key="app/src/main/res/drawable/textview_bg_enable.xml" value="0.3155" />
+        <entry key="app/src/main/res/layout/activity_launch.xml" value="0.254981884057971" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.17873892652423137" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/button_custom_mode.xml" value="0.55" />
@@ -55,14 +57,18 @@
         <entry key="app/src/main/res/layout/dialog_count_down_time_picker.xml" value="0.375" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/dialog_scene_add_picture.xml" value="0.351239013671875" />
+        <entry key="app/src/main/res/layout/dialog_schedule_add.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/dialog_schedule_select_scene.xml" value="0.27717391304347827" />
+        <entry key="app/src/main/res/layout/dialog_schedule_select_week.xml" value="0.5" />
         <entry key="app/src/main/res/layout/dialog_time_picker.xml" value="0.1308876811594203" />
+        <entry key="app/src/main/res/layout/dialog_verification_code.xml" value="0.33" />
         <entry key="app/src/main/res/layout/dialogfrag_connect_to_wifi.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/dialogfrag_edittext.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/dialogfrag_group_selector.xml" value="0.5" />
         <entry key="app/src/main/res/layout/dialogfrag_pair_device.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/fragment_device_control.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_device_list.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/fragment_device_settings.xml" value="0.1884498480243161" />
+        <entry key="app/src/main/res/layout/fragment_device_settings.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.2942708333333333" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.334375" />
@@ -75,6 +81,8 @@
         <entry key="app/src/main/res/layout/itemview_pair_device.xml" value="0.6143386897404203" />
         <entry key="app/src/main/res/layout/itemview_scene_device.xml" value="0.335" />
         <entry key="app/src/main/res/layout/itemview_scene_list.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/itemview_scene_sche_scene.xml" value="0.27717391304347827" />
+        <entry key="app/src/main/res/layout/itemview_scene_schedule.xml" value="0.27717391304347827" />
         <entry key="app/src/main/res/layout/more_fragment.xml" value="0.2942708333333333" />
         <entry key="app/src/main/res/layout/register_fragment.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/sample_my_view.xml" value="0.1711227416992187" />

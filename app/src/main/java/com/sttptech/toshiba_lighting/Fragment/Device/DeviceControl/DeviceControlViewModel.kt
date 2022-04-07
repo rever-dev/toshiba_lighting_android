@@ -140,14 +140,18 @@ class DeviceControlViewModel(application: Application) : AndroidViewModel(applic
             )
         }
     }
+
+//    fun rgbChange(br: Int, rgb: IntArray) {
+//        if (rgbModeCounter >= 5) {
+//            MqttPublish.triggerRGBMode(mqtt, br, rgb, model, bssid)
+//            rgbModeCounter = 0
+//        } else {
+//            rgbModeCounter++
+//        }
+//    }
     
     fun rgbChange(br: Int, rgb: IntArray) {
-        if (rgbModeCounter >= 5) {
-            MqttPublish.triggerRGBMode(mqtt, br, rgb, model, bssid)
-            rgbModeCounter = 0
-        } else {
-            rgbModeCounter++
-        }
+        MqttPublish.triggerRGBMode(mqtt, br, rgb, model, bssid)
     }
     
     fun rgbBrChange(br: Int, rgb: IntArray) {

@@ -105,8 +105,45 @@
 
     <!--  scene schedule  -->
     <string name="sceneSchedule">情境排程</string>
+    <string name="scheduleOnSuccess">情境排程成功</string>
+    <string name="scheduleOnFail">情境排程失敗</string>
+    <string name="scheduleAdd">新增情境排程</string>
+    <string name="scheduleEdit">編輯情境排程</string>
+    <string name="repeat">重覆</string>
+    <string name="selectTheScene">選擇一個情境</string>
+    <string name="selectWeek">選擇排程週期</string>
+    <string name="scheduleAddSuccess">排程新增成功</string>
+    <string name="scheduleAddFail">排程新增失敗</string>
+    <string name="mustSelectScene">請選擇一個情境</string>
+    <string name="mustSelectWeek">請選擇至少一個星期</string>
+    <string name="deleteSchedule">刪除排程</string>
+    <string name="sureDeleteSchedule">確定要刪除這個排程嗎？</string>
+    <string name="deleteScheduleSuccess">情境刪除成功</string>
+    <string name="deleteScheduleFail">情境刪除失敗</string>
 
+    <!--  More  -->
+    <string name="login_account">登入帳號：</string>
+    <string name="current_version">當前版本：</string>
+    <string name="invite">邀請</string>
+    <string name="invite_success">成功發送邀請</string>
+    <string name="invite_fail">發送邀請失敗</string>
+    <string name="invite_family">邀請家中成員加入</string>
+    <string name="enter_invitees_email">輸入受邀者電子郵件</string>
+    <string name="pleas_checked_invitees_is_member">請確認受邀者已下載App並已註冊為東芝會員</string>
+    <string name="accept_invite_from_family">接受來自家人的邀請</string>
+    <string name="accept_invite">接受邀請</string>
+    <string name="enter_verification_code_to_accept_invite">輸入由電子郵件收到的驗證碼來接受邀請</string>
+    <string name="verification_code">驗證碼</string>
+    <string name="verification_code_is_six_digits">驗證碼必須為六位數</string>
+    <string name="verify_fail">驗證失敗</string>
+    <string name="unbind_fail">解除綁定失敗</string>
+    <string name="groups_manage">房間管理</string>
+    <string name="groups_edit">房間編輯</string>
 
+    <string name="accept_share_from">接受分享來自</string>
+    <string name="unbind_share">解除分享綁定</string>
+    <string name="unbind_share_msg">解除綁定後，將清空當前的所有裝置、房間、情境，確定要解除嗎？</string>
+    <string name="bind_detail">該帳號目前接受其他帳號的分享，可自定義情境、排程，也可以操作燈具，但部分功能受限</string>
 
     <!--Mode-->
     <string name="mode01">美肌</string>
@@ -141,6 +178,20 @@
     <string name="modifyCustomName_fail">自訂名稱修改失敗</string>
 
     <!--  Time  -->
+    <string name="am">上午</string>
+    <string name="pm">下午</string>
+    <string name="everyDay">每一天</string>
+    <string name="everyWeekend">每個週末</string>
+    <string name="everyWorkingDay">每個工作日</string>
+
+    <string name="monday">週一</string>
+    <string name="tuesday">週二</string>
+    <string name="wednesday">週三</string>
+    <string name="thursday">週四</string>
+    <string name="friday">週五</string>
+    <string name="saturday">週六</string>
+    <string name="sunday">週日</string>
+
     <string name="hours">時</string>
     <string name="minutes">分</string>
     <string name="seconds">秒</string>

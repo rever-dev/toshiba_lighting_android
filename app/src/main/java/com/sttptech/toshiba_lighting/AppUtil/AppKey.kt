@@ -6,6 +6,8 @@ object  AppKey {
         const val SHP_LOGIN: String = "SHP_LOGIN"
         const val SHP_ACCOUNT: String = "SHP_ACCOUNT"
         const val SHP_TOKEN: String = "SHP_TOKEN"
+        const val SHP_SHARE: String = "SHP_SHARE"
+        const val SHP_SHARE_EMAIL: String = "SHP_SHARE_EMAIL"
         
         const val DEVICE_NAME = "dev_name"
         const val DEVICE_UID = "dev_uid"

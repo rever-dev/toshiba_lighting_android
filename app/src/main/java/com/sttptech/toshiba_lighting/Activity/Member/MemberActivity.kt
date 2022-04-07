@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
+import com.sttptech.toshiba_lighting.Activity.LaunchActivity.LaunchActivity
 import com.sttptech.toshiba_lighting.Activity.Main.MainActivity
 import com.sttptech.toshiba_lighting.AppUtil.AppKey
 import com.sttptech.toshiba_lighting.AppUtil.PermissionUtil
@@ -18,8 +19,8 @@ class MemberActivity : AppCompatActivity() {
         }
     }
 
-    fun startMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+    fun startLaunchActivity() {
+        val intent = Intent(this, LaunchActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
         finish()
@@ -40,7 +41,7 @@ class MemberActivity : AppCompatActivity() {
         PermissionUtil.requestPermission(this, PermissionUtil.PERMISSION_REQUEST_FINE_LOCATION)
 
         if (checkLoginStatus())
-            startMainActivity()
+            startLaunchActivity()
 
     }
 }

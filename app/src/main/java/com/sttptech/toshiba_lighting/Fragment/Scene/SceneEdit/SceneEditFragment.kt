@@ -81,7 +81,7 @@ class SceneEditFragment : Fragment(), View.OnClickListener {
     }
     
     private lateinit var vb: FragmentSceneEditBinding
-    private val devAdapter = SceneDeviceAdapter()
+    private val devAdapter = SceneDeviceAdapter(SceneDeviceAdapter.Action.EDIT)
     
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -186,4 +186,25 @@ interface APIService {
             @Body requestBody: RequestBody?
         ): Call<ResponseBody?>
     }
+    
+    interface Share {
+    
+        @POST("terminal/share/mail")
+        fun inviteMember(
+            @HeaderMap header: Map<String?, String?>?,
+            @Body requestBody: RequestBody?
+        ): Call<ResponseBody?>
+    
+        @POST("terminal/share/accept")
+        fun bindShare(
+            @HeaderMap header: Map<String?, String?>?,
+            @Body requestBody: RequestBody?
+        ): Call<ResponseBody?>
+    
+        @POST("terminal/share/remove")
+        fun unbindShare(
+            @HeaderMap header: Map<String?, String?>?,
+            @Body requestBody: RequestBody?
+        ): Call<ResponseBody?>
+    }
 }

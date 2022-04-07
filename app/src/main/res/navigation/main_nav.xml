@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/moreFragment">
+    app:startDestination="@id/sceneListFragment">
 
     <fragment
         android:id="@+id/moreFragment"
@@ -59,7 +59,9 @@
         tools:layout="@layout/fragment_scene_edit" >
         <action
             android:id="@+id/action_sceneEditFragment_to_deviceControlFragment"
-            app:destination="@id/deviceControlFragment" />
+            app:destination="@id/deviceControlFragment"
+            app:enterAnim="@anim/anim_fragment_in"
+            app:popExitAnim="@anim/anim_fragment_out" />
     </fragment>
     <fragment
         android:id="@+id/sceneCreateFragment"

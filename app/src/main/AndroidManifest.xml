@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sttptech.toshiba_lighting">
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -21,9 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Toshiba_lighting">
         <activity
-            android:name=".Activity.Member.MemberActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustPan">
+            android:name=".Activity.LaunchActivity.LaunchActivity"
+            android:screenOrientation="fullSensor"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,14 +32,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.Main.MainActivity"
+            android:name=".Activity.Member.MemberActivity"
             android:exported="false"
+            android:screenOrientation="locked"
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
+            android:name=".Activity.Main.MainActivity"
+            android:exported="false"
+            android:screenOrientation="locked"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="locked"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -48,6 +56,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
         <service android:name="org.eclipse.paho.android.service.MqttService" />
     </application>
 

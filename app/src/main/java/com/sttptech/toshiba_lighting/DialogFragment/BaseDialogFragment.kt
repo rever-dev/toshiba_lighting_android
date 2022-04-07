@@ -50,6 +50,5 @@ abstract class BaseDialogFragment(
         }
         window.attributes = lp
         window.setBackgroundDrawable(ColorDrawable())
-
     }
 }

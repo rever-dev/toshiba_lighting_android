@@ -1,6 +1,8 @@
 package com.sttptech.toshiba_lighting.Activity.Main
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,16 +11,14 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.espressif.iot.esptouch.EsptouchTask
 import com.espressif.iot.esptouch.IEsptouchResult
-import com.espressif.iot.esptouch2.provision.EspProvisioner
-import com.espressif.iot.esptouch2.provision.EspProvisioningListener
-import com.espressif.iot.esptouch2.provision.EspProvisioningRequest
-import com.espressif.iot.esptouch2.provision.EspProvisioningResult
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.orhanobut.logger.Logger
+import com.sttptech.toshiba_lighting.Activity.Member.MemberActivity
 import com.sttptech.toshiba_lighting.AppUtil.AppKey
 import com.sttptech.toshiba_lighting.AppUtil.PermissionUtil
 import com.sttptech.toshiba_lighting.Application.BaseApplication
@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity(),
     PairDeviceDialogFragment.PairFinishCallback {
     
     companion object {
-        
         private const val TAG: String = "MainActivity"
     }
     
@@ -54,17 +53,18 @@ class MainActivity : AppCompatActivity(),
         } catch (e: Exception) {
         }
     
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-    
+        
         val bottomNav = findViewById<BottomNavigationView>(R.id.main_bottomNav)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.main_fragContainer) as NavHostFragment?
         val navController = navHostFragment!!.navController
         NavigationUI.setupWithNavController(bottomNav, navController)
-    
-    
+        
+        
         // 檢查 如果是在以下頁面無法使用Navigation
         val dcl =
             NavController.OnDestinationChangedListener { controller: NavController?, destination: NavDestination, arguments: Bundle? ->
@@ -79,14 +79,20 @@ class MainActivity : AppCompatActivity(),
                 }
             }
         navController.addOnDestinationChangedListener(dcl)
-    
+        
+        /* refresh layout */
+        findViewById<SwipeRefreshLayout>(R.id.main_refreshLayout).apply {
+            setOnRefreshListener {
+                this.isRefreshing = false
+                getDataFromServer()
+            }
+        }.isEnabled = false
+        
+        /* request permission */
         PermissionUtil.requestPermission(
             this,
             PermissionUtil.PERMISSION_REQUEST_FINE_LOCATION
         )
-    
-        if (checkLoginStatus())
-            getDataFromServer()
     }
     
     private fun checkLoginStatus(): Boolean {
@@ -96,11 +102,46 @@ class MainActivity : AppCompatActivity(),
                         "\nAccount: ${getString(AppKey.SHP_ACCOUNT, null)}" +
                         "\nToken: ${getString(AppKey.SHP_TOKEN, null)}"
             )
-        
+    
             return getBoolean(AppKey.SHP_LOGIN, false) &&
                     getString(AppKey.SHP_ACCOUNT, null) != null &&
                     getString(AppKey.SHP_TOKEN, null) != null
         }
+    }
+    
+    fun logout() {
+        application.getSharedPreferences(AppKey.SHP_NAME, MODE_PRIVATE).edit().clear().apply()
+        
+        val localService = BaseApplication.repository.localS
+        Thread {
+            localService.clearSceneTable()
+            localService.clearCeilingLightTable()
+            localService.clearGroupTable()
+            runOnUiThread {
+                val intent = Intent(this, MemberActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+                finish()
+            }
+        }.start()
+        
+        
+    }
+    
+    fun refreshDataFromServer(): Boolean {
+        val remoteService = BaseApplication.repository.remoteS
+        val info = remoteService.getInfoList()
+        if (info != null) {
+            application.getSharedPreferences(AppKey.SHP_NAME, MODE_PRIVATE).edit()
+                .putBoolean(AppKey.SHP_SHARE, info.datum.share)
+                .putString(AppKey.SHP_SHARE_EMAIL, info.datum.shareMail)
+                .apply()
+            syncDevice2DB(info)
+            syncGroup2DB(info)
+            syncScene2DB(info)
+            return true
+        }
+        return false
     }
     
     private fun getDataFromServer() {

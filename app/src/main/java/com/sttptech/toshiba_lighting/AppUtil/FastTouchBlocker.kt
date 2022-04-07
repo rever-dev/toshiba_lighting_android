@@ -5,7 +5,7 @@ class FastTouchBlocker {
     private var lastTouchTamps: Long
     
     init {
-        lastTouchTamps = System.currentTimeMillis()
+        lastTouchTamps = System.currentTimeMillis() - 1000
     }
     
     fun onTouch(): Boolean {
